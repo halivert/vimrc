@@ -1,3 +1,3 @@
-if (&ft != 'php.html')
-  setlocal filetype=php.html
+if (&ft != 'php.html.javascript')
+  setlocal filetype=php.html.javascript
 endif
