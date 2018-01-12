@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -11,10 +11,10 @@ Plug 'ervandew/supertab'
 " Haskell
 Plug 'yogsototh/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
-Plug 'eagletmt/ghcmod-vim'
-Plug 'eagletmt/neco-ghc'
-Plug 'Twinside/vim-hoogle'
-Plug 'pbrisbin/html-template-syntax'
+" Plug 'eagletmt/ghcmod-vim'
+" Plug 'eagletmt/neco-ghc'
+" Plug 'Twinside/vim-hoogle'
+" Plug 'pbrisbin/html-template-syntax'
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -37,9 +37,6 @@ Plug '2072/PHP-Indenting-for-VIm'
 Plug 'mustache/vim-mustache-handlebars'
 call plug#end()
 filetype plugin indent on
-
-nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
-:nnoremap <space>r <Plug>(unite_restart)
 
 " ------------
 "  Latex
