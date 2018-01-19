@@ -8,6 +8,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
+Plug 'dhruvasagar/vim-table-mode'
 " Haskell
 Plug 'yogsototh/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
@@ -80,3 +81,5 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Mustache
 let mustache_abreviations = 1
+
+let g:table_mode_tableize_map = '<Leader>tz'
