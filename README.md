@@ -7,6 +7,10 @@ y cosas por el estilo.
 
 ~/.vim/plugins.vim
 
+~/.vim/functions.vim
+
+~/.vim/colors/solarized.vim
+
 ~/.vim/ftplugin/blade.vim
 
 ~/.vim/ftplugin/haskell.vim
