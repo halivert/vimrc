@@ -32,7 +32,6 @@ nmap <Leader>y "+y
 nmap <Leader>p "+p
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
-vnoremap // y/<C-R>"<cr>
 
 augroup autosourcing
   autocmd!

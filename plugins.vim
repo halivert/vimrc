@@ -9,6 +9,7 @@ Plug 'tpope/vim-repeat'
 Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'nelstrom/vim-visual-star-search'
 " Haskell
 Plug 'yogsototh/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
