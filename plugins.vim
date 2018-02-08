@@ -40,6 +40,8 @@ Plug 'noahfrederick/vim-laravel'
 Plug '2072/PHP-Indenting-for-VIm'
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
+" Kotlin
+Plug 'udalov/kotlin-vim'
 call plug#end()
 filetype plugin indent on
 
