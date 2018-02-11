@@ -80,3 +80,5 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Mustache
 let mustache_abreviations = 1
+
+let w:solarized_style = "dark"
