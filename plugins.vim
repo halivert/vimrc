@@ -8,6 +8,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'nelstrom/vim-visual-star-search'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Haskell
 Plug 'yogsototh/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
@@ -35,6 +40,8 @@ Plug 'noahfrederick/vim-laravel'
 Plug '2072/PHP-Indenting-for-VIm'
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
+" Kotlin
+Plug 'udalov/kotlin-vim'
 call plug#end()
 filetype plugin indent on
 
@@ -80,5 +87,37 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Mustache
 let mustache_abreviations = 1
+
+let g:table_mode_tableize_map = '<Leader>tz'
+
+" Airline
+let g:airline_theme = 'minimalist'
+if exists('g:airline_powerline_fonts')
+  let g:airline_powerline_fonts = 1
+elseif &encoding == 'utf-8'
+  let g:airline_symbols = {}
+  let g:airline_powerline_fonts = 0
+  let g:airline_symbols_ascii = 0
+  let g:airline_left_sep = '»'
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '«'
+  let g:airline_right_sep = '◀'
+  let g:airline_symbols.crypt = '🔒'
+  let g:airline_symbols.linenr = '☰'
+  let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.maxlinenr = '㏑'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+  let g:airline_symbols.paste = 'Þ'
+  let g:airline_symbols.paste = '∥'
+  let g:airline_symbols.spell = 'Ꞩ'
+  let g:airline_symbols.notexists = '∄'
+  let g:airline_symbols.whitespace = 'Ξ'
+else
+  let g:airline_symbols_ascii = 1
+endif
 
 let w:solarized_style = "dark"

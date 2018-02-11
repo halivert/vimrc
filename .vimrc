@@ -1,6 +1,7 @@
 set nocompatible
 
 so ~/.vim/plugins.vim
+so ~/.vim/functions.vim
 
 set showcmd
 set rnu
@@ -13,6 +14,7 @@ set splitright
 set autoindent
 set expandtab
 set sw=2
+set tabstop=2
 set softtabstop=2
 set ruler
 set wrap
@@ -30,7 +32,6 @@ nmap <Leader>y "+y
 nmap <Leader>p "+p
 vnoremap <Leader>y "+y
 vnoremap <Leader>p "+p
-vnoremap // y/<C-R>"<cr>
 
 augroup autosourcing
   autocmd!
@@ -46,3 +47,9 @@ if (exists('+colorcolumn'))
     set colorcolumn=120
     highlight ColorColumn ctermbg=8
 endif
+
+if has('gui_running')
+  set guifont=IBM\ Plex\ Mono\ Medium\ Italic\ 11
+  let w:solarized_style="dark"
+endif
+

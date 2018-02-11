@@ -7,6 +7,10 @@ y cosas por el estilo.
 
 ~/.vim/plugins.vim
 
+~/.vim/functions.vim
+
+~/.vim/colors/solarized.vim
+
 ~/.vim/ftplugin/blade.vim
 
 ~/.vim/ftplugin/haskell.vim
@@ -14,3 +18,11 @@ y cosas por el estilo.
 ~/.vim/ftplugin/make.vim
 
 ~/.vim/ftplugin/php.vim
+
+Para instalar el [administrador de plugins](https://github.com/junegunn/vim-plug) hacen falta
+estas dos líneas en nuestra terminal:
+
+```console
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
