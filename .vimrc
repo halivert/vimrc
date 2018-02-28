@@ -9,8 +9,10 @@ syntax on
 
 let mapleader = '`'
 set path+=**
-set splitbelow
-set splitright
+" Window is put bellow current one
+set sb
+" Windows is put right of the current one
+set spr
 set autoindent
 set expandtab
 set sw=2
@@ -22,16 +24,23 @@ set wildmenu
 set hlsearch
 set textwidth=117
 set diffopt=vertical
+set emo
 let g:PHP_removeCRwhenUnix=1
 colo solarized
+
+if has('gui_running')
+  set guifont=IBM\ Plex\ Mono\ 11
+  let w:solarized_style='dark'
+endif
+
 nnoremap Q <nop>
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
-nmap <Leader><space> :nohlsearch<cr>
-nmap <Leader>es :UltiSnipsEdit<cr>
-nmap <Leader>y "+y
-nmap <Leader>p "+p
-vnoremap <Leader>y "+y
-vnoremap <Leader>p "+p
+nmap <leader>ev :tabedit $MYVIMRC<cr>
+nmap <leader><space> :nohlsearch<cr>
+nmap <leader>es :UltiSnipsEdit<cr>
+nmap <leader>y "+y
+nmap <leader>p "+p
+vnoremap <leader>y "+y
+vnoremap <leader>p "+p
 
 augroup autosourcing
   autocmd!
@@ -47,9 +56,3 @@ if (exists('+colorcolumn'))
     set colorcolumn=120
     highlight ColorColumn ctermbg=8
 endif
-
-if has('gui_running')
-  set guifont=IBM\ Plex\ Mono\ Medium\ Italic\ 11
-  let w:solarized_style="dark"
-endif
-

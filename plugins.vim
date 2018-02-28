@@ -42,6 +42,8 @@ Plug '2072/PHP-Indenting-for-VIm'
 Plug 'mustache/vim-mustache-handlebars'
 " Kotlin
 Plug 'udalov/kotlin-vim'
+" Latex
+Plug 'vim-latex/vim-latex'
 call plug#end()
 filetype plugin indent on
 
@@ -61,10 +63,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_cpp_compiler_options = "`pkg-config gtkmm-3.0 --libs --cflags`"
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-', 'trimming empty \<']
 let g:syntastic_ignore_files = ['\m\c\.xml$', '\m\c\.ts$']
@@ -84,10 +87,12 @@ let g:UltiSnipsEditSplit="vertical"
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:ycm_show_diagnostics_ui = 0
 
 " Mustache
 let mustache_abreviations = 1
 
+" Table mode
 let g:table_mode_tableize_map = '<Leader>tz'
 
 " Airline
