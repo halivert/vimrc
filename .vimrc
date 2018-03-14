@@ -1,5 +1,9 @@
 set nocompatible
 
+if exists('py2') && has('python')
+elseif has('python3')
+endif
+
 so ~/.vim/plugins.vim
 so ~/.vim/functions.vim
 
