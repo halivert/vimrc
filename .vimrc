@@ -30,6 +30,7 @@ set textwidth=117
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
+let w:solarized_style='dark'
 set t_Co=256
 colo solarized
 
@@ -61,4 +62,3 @@ if (exists('+colorcolumn'))
     highlight ColorColumn ctermbg=8
 endif
 
-let w:solarized_style='dark'
