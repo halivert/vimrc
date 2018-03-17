@@ -35,7 +35,6 @@ colo solarized
 
 if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
-  let w:solarized_style='dark'
 endif
 
 nnoremap Q <nop>
@@ -61,3 +60,5 @@ if (exists('+colorcolumn'))
     set colorcolumn=120
     highlight ColorColumn ctermbg=8
 endif
+
+let w:solarized_style='dark'
