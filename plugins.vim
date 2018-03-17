@@ -126,7 +126,4 @@ else
   let g:airline_symbols_ascii = 1
 endif
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
+let w:solarized_style = "dark"
