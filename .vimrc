@@ -26,6 +26,7 @@ set textwidth=117
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
+set t_Co=256
 colo solarized
 
 if has('gui_running')

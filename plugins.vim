@@ -93,6 +93,7 @@ let g:ycm_show_diagnostics_ui = 0
 let mustache_abreviations = 1
 
 " Table mode
+let g:table_mode_corner = '|'
 let g:table_mode_tableize_map = '<Leader>tz'
 
 " Airline
