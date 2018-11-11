@@ -9,6 +9,7 @@ so ~/.vim/functions.vim
 
 set showcmd
 set rnu
+set nu
 syntax on
 
 let mapleader = '`'
