@@ -26,7 +26,7 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=117
+set textwidth=72
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
