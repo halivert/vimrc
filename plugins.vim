@@ -9,7 +9,7 @@ Plug 'tpope/vim-repeat'
 Plug 'alvan/vim-closetag'
 " Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
@@ -18,6 +18,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'powerline/powerline-fonts'
+
 " Haskell
 " Plug 'yogsototh/haskell-vim'
 " Plug 'enomsg/vim-haskellConcealPlus'
@@ -56,9 +57,6 @@ Plug 'noahfrederick/vim-laravel'
 " PHP
 Plug '2072/PHP-Indenting-for-VIm'
 
-" PHP
-Plug '2072/PHP-Indenting-for-VIm'
-
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
 
@@ -67,14 +65,15 @@ Plug 'udalov/kotlin-vim'
 
 " Latex
 Plug 'vim-latex/vim-latex'
+
 " Dev icons
 " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 filetype plugin indent on
 
-" ------------
-"  Latex
-" ------------
+"  |-------|
+"  | Latex |
+"  |-------|
 
 " set grepprg=grep\ -nH\ $*
 " let g:tex_flavor='latex'
@@ -82,9 +81,9 @@ filetype plugin indent on
 "       \ | execute ':silent !'.<q-args>
 "       \ | execute ':redraw!'
 
-" ------------
-" Syntastic
-" ------------
+" |-----------|
+" | Syntastic |
+" |-----------|
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -144,15 +143,15 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 
-" ------------
-" Close tags
-" ------------
+" |------------|
+" | Close tags |
+" |------------|
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 
-" ------------
-" NERDTree
-" ------------
+" |----------|
+" | NERDTree |
+" |----------|
 
 map <c-n> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
