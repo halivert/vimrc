@@ -6,7 +6,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'Valloric/YouCompleteMe'
+Plug 'alvan/vim-closetag'
+" Plug 'posva/vim-vue'
+Plug 'tyru/caw.vim'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'ervandew/supertab'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
@@ -14,7 +17,7 @@ Plug 'nelstrom/vim-visual-star-search'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
+" Plug 'powerline/powerline-fonts'
 " Haskell
 " Plug 'yogsototh/haskell-vim'
 " Plug 'enomsg/vim-haskellConcealPlus'
@@ -53,6 +56,9 @@ Plug 'noahfrederick/vim-laravel'
 " PHP
 Plug '2072/PHP-Indenting-for-VIm'
 
+" PHP
+Plug '2072/PHP-Indenting-for-VIm'
+
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
 
@@ -61,23 +67,25 @@ Plug 'udalov/kotlin-vim'
 
 " Latex
 Plug 'vim-latex/vim-latex'
-
+" Dev icons
+" Plug 'ryanoasis/vim-devicons'
 call plug#end()
 filetype plugin indent on
 
-" |-------|
-" | Latex |
-" |-------|
+" ------------
+"  Latex
+" ------------
 
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-command! -nargs=1 Silent
-      \ | execute ':silent !'.<q-args>
-      \ | execute ':redraw!'
+" set grepprg=grep\ -nH\ $*
+" let g:tex_flavor='latex'
+" command! -nargs=1 Silent
+"       \ | execute ':silent !'.<q-args>
+"       \ | execute ':redraw!'
 
-" |-----------|
-" | Syntastic |
-" |-----------|
+" ------------
+" Syntastic
+" ------------
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -128,35 +136,23 @@ let g:table_mode_tableize_map = '<Leader>tz'
 " | Airline |
 " |---------|
 let g:airline_theme = 'minimalist'
-if exists('g:airline_powerline_fonts')
-  let g:airline_powerline_fonts = 1
-elseif &encoding == 'utf-8'
-  let g:airline_symbols = {}
-  let g:airline_powerline_fonts = 0
-  let g:airline_symbols_ascii = 0
-  let g:airline_left_sep = '»'
-  let g:airline_left_sep = '▶'
-  let g:airline_right_sep = '«'
-  let g:airline_right_sep = '◀'
-  let g:airline_symbols.crypt = '🔒'
-  let g:airline_symbols.linenr = '☰'
-  let g:airline_symbols.linenr = '␊'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-  let g:airline_symbols.maxlinenr = ''
-  let g:airline_symbols.maxlinenr = '㏑'
-  let g:airline_symbols.branch = '⎇'
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.paste = 'Þ'
-  let g:airline_symbols.paste = '∥'
-  let g:airline_symbols.spell = 'Ꞩ'
-  let g:airline_symbols.notexists = '∄'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  let g:airline_symbols_ascii = 1
-endif
+
+let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
+
+" ------------
+" Close tags
+" ------------
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" ------------
+" NERDTree
+" ------------
+
+map <c-n> :NERDTreeToggle<cr>
+let NERDTreeShowHidden=1

@@ -9,10 +9,11 @@ so ~/.vim/functions.vim
 
 set showcmd
 set rnu
+set nu
 syntax on
 
 let mapleader = '`'
-set path+=**
+" set path+=**
 " Window is put bellow current one
 set sb
 " Windows is put right of the current one
@@ -20,7 +21,7 @@ set spr
 set autoindent
 set expandtab
 set sw=2
-set tabstop=2
+set ts=2
 set softtabstop=2
 set ruler
 set wrap
@@ -33,6 +34,8 @@ let g:PHP_removeCRwhenUnix=1
 let w:solarized_style='dark'
 set t_Co=256
 colo solarized
+set background=dark
+" colo pablo
 
 if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
@@ -40,7 +43,8 @@ endif
 
 nnoremap Q <nop>
 nmap <leader>ev :tabedit $MYVIMRC<cr>
-nmap <leader><space> :nohlsearch<cr>
+" Press two times <leader>
+nmap <leader> <space> :nohlsearch<cr>
 nmap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
@@ -58,7 +62,14 @@ autocmd BufWinEnter *.* silent loadview
 cmap w!! w !sudo tee > /dev/null %
 
 if (exists('+colorcolumn'))
-    set colorcolumn=120
-    highlight ColorColumn ctermbg=8
+  set colorcolumn=120
+  highlight ColorColumn guibg=#5f8700 ctermbg=0
 endif
 
+let g:elite_mode=1
+if get(g:, 'elite_mode')
+  nnoremap <Up> <nop>
+  nnoremap <Down> <nop>
+  nnoremap <Left> <nop>
+  nnoremap <Right> <nop>
+endif
