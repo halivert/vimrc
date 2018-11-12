@@ -1,7 +1,7 @@
 ## Vimrc
 
-Este es mi conjunto de archivos de vimrc, con configuraciones por archivo
-y cosas por el estilo.
+Este es mi conjunto de archivos de vimrc, con configuraciones por
+archivo y cosas por el estilo.
 
 ~/.vimrc
 
@@ -19,10 +19,11 @@ y cosas por el estilo.
 
 ~/.vim/ftplugin/php.vim
 
-Para instalar el [administrador de plugins](https://github.com/junegunn/vim-plug) hacen falta
-estas dos líneas en nuestra terminal:
+Para instalar el [administrador de
+plugins](https://github.com/junegunn/vim-plug) hacen falta estas dos
+líneas en nuestra terminal:
 
 ```console
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
