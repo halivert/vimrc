@@ -62,7 +62,7 @@ autocmd BufWinEnter *.* silent loadview
 cmap w!! w !sudo tee > /dev/null %
 
 if (exists('+colorcolumn'))
-  set colorcolumn=73
+  set colorcolumn=81
   highlight ColorColumn guibg=#5f8700 ctermbg=0
 endif
 
