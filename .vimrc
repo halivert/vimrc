@@ -27,7 +27,7 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=72
+set textwidth=80
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
@@ -44,7 +44,7 @@ endif
 nnoremap Q <nop>
 nmap <leader>ev :tabedit $MYVIMRC<cr>
 " Press two times <leader>
-nmap <leader> <space> :nohlsearch<cr>
+" nmap <leader> <space> :nohlsearch<cr>
 nmap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
@@ -61,8 +61,11 @@ autocmd BufWinEnter *.* silent loadview
 
 cmap w!! w !sudo tee > /dev/null %
 
+au VimEnter * call IMAP('`?', '¿', '')
+au VimEnter * call IMAP('`!', '¡', '')
+
 if (exists('+colorcolumn'))
-  set colorcolumn=73
+  set colorcolumn=81
   highlight ColorColumn guibg=#5f8700 ctermbg=0
 endif
 
@@ -73,3 +76,6 @@ if get(g:, 'elite_mode')
   nnoremap <Left> <nop>
   nnoremap <Right> <nop>
 endif
+
+set lazyredraw
+set regexpengine=1

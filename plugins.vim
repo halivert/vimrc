@@ -7,6 +7,9 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'alvan/vim-closetag'
+Plug 'junegunn/limelight.vim'
+Plug 'plasticboy/vim-markdown'
+
 " Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
 Plug 'Valloric/YouCompleteMe'
@@ -76,7 +79,8 @@ filetype plugin indent on
 "  |-------|
 
 " set grepprg=grep\ -nH\ $*
-" let g:tex_flavor='latex'
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
 " command! -nargs=1 Silent
 "       \ | execute ':silent !'.<q-args>
 "       \ | execute ':redraw!'
