@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/vimproc.vim', { 'do' : 'make' }
 Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -8,44 +7,26 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'alvan/vim-closetag'
 Plug 'junegunn/limelight.vim'
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
-" Plug 'posva/vim-vue'
+Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
 Plug 'Valloric/YouCompleteMe'
-Plug 'ervandew/supertab'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
 
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'powerline/powerline-fonts'
-
-" Haskell
-" Plug 'yogsototh/haskell-vim'
-" Plug 'enomsg/vim-haskellConcealPlus'
-" Plug 'eagletmt/ghcmod-vim'
-" Plug 'eagletmt/neco-ghc'
-" Plug 'Twinside/vim-hoogle'
-" Plug 'pbrisbin/html-template-syntax'
 
 " Git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-" Ctags
-Plug 'craigemery/vim-autotag'
-
-" Angular
-" Plug 'burnettk/vim-angular'
-
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
-" React
-" Plug 'mxw/vim-jsx'
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -69,26 +50,21 @@ Plug 'udalov/kotlin-vim'
 " Latex
 Plug 'vim-latex/vim-latex'
 
-" Dev icons
-" Plug 'ryanoasis/vim-devicons'
 call plug#end()
 filetype plugin indent on
 
 "  |-------|
 "  | Latex |
 "  |-------|
-
-" set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
-" command! -nargs=1 Silent
-"       \ | execute ':silent !'.<q-args>
-"       \ | execute ':redraw!'
+command! -nargs=1 Silent
+      \ | execute ':silent !'.<q-args>
+      \ | execute ':redraw!'
 
 " |-----------|
 " | Syntastic |
 " |-----------|
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -102,8 +78,20 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_cpp_compiler_options = "`pkg-config gtkmm-3.0 --libs --cflags`"
 let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute "ng-', 'trimming empty \<']
 let g:syntastic_ignore_files = ['\m\c\.xml$', '\m\c\.ts$']
-let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+let g:syntastic_python_checkers = ['pylint']
 let NERDTreeShowHidden=1
+
+" |-----------|
+" | Limelight |
+" |-----------|
+let g:limelight_default_coefficient = 0.7
+
+" |----------|
+" | Markdown |
+" |----------|
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
 
 " |----------|
 " | Snippets |
@@ -121,8 +109,8 @@ let g:UltiSnipsEditSplit="vertical"
 " |-----|
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_global_ycm_extra_conf = "~/.vim/ycm/.ycm_extra_conf.py"
 
 " |----------|
 " | Mustache |
@@ -138,24 +126,50 @@ let g:table_mode_tableize_map = '<Leader>tz'
 " |---------|
 " | Airline |
 " |---------|
-let g:airline_theme = 'minimalist'
-
+let g:airline_theme = 'bubblegum'
 let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
 
 " |------------|
 " | Close tags |
 " |------------|
-
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 
 " |----------|
 " | NERDTree |
 " |----------|
-
 map <c-n> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
+
+" |--------|
+" | Denite |
+" |--------|
+call denite#custom#var('file/rec', 'command',
+\ ['ag', '--follow', '--nogroup', '-g', ''])
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#map(
+\ 'insert',
+\ '<C-J>',
+\ '<denite:move_to_next_line>',
+\ 'noremap'
+\)
+call denite#custom#map(
+\ 'insert',
+\ '<C-K>',
+\ '<denite:move_to_previous_line>',
+\ 'noremap'
+\)
+call denite#custom#map(
+\ 'insert',
+\ '<C-T>',
+\ '<denite:do_action:tabopen>',
+\ 'noremap'
+\)
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',
+\ ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
