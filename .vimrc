@@ -13,7 +13,6 @@ set nu
 syntax on
 
 let mapleader = '`'
-" set path+=**
 " Window is put bellow current one
 set sb
 " Windows is put right of the current one
@@ -27,7 +26,7 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=72
+set textwidth=80
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
@@ -35,7 +34,6 @@ let w:solarized_style='dark'
 set t_Co=256
 colo solarized
 set background=dark
-" colo pablo
 
 if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
@@ -43,8 +41,6 @@ endif
 
 nnoremap Q <nop>
 nmap <leader>ev :tabedit $MYVIMRC<cr>
-" Press two times <leader>
-nmap <leader> <space> :nohlsearch<cr>
 nmap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
@@ -61,6 +57,9 @@ autocmd BufWinEnter *.* silent loadview
 
 cmap w!! w !sudo tee > /dev/null %
 
+au VimEnter * call IMAP('`?', '¿', '')
+au VimEnter * call IMAP('`!', '¡', '')
+
 if (exists('+colorcolumn'))
   set colorcolumn=81
   highlight ColorColumn guibg=#5f8700 ctermbg=0
@@ -73,3 +72,10 @@ if get(g:, 'elite_mode')
   nnoremap <Left> <nop>
   nnoremap <Right> <nop>
 endif
+
+set lazyredraw
+set regexpengine=1
+
+command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
+let g:vue_disable_pre_processors=1
+set updatetime=100
