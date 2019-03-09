@@ -76,7 +76,8 @@ endif
 set lazyredraw
 set regexpengine=1
 
-command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
+command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e
+  \ <args>
 let g:vue_disable_pre_processors=1
 set updatetime=100
 nmap <C-S> :tabe<CR>
