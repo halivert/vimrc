@@ -26,7 +26,7 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=80
+set textwidth=72
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
@@ -57,11 +57,11 @@ autocmd BufWinEnter *.* silent loadview
 
 cmap w!! w !sudo tee > /dev/null %
 
-au VimEnter * call IMAP('`?', '¿', '')
-au VimEnter * call IMAP('`!', '¡', '')
+imap `? ¿
+imap `! ¡
 
 if (exists('+colorcolumn'))
-  set colorcolumn=81
+  set colorcolumn=73
   highlight ColorColumn guibg=#5f8700 ctermbg=0
 endif
 
@@ -76,6 +76,9 @@ endif
 set lazyredraw
 set regexpengine=1
 
-command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
+command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e
+  \ <args>
 let g:vue_disable_pre_processors=1
 set updatetime=100
+nmap <C-S> :tabe<CR>
+nmap <C-W> :bd<CR>

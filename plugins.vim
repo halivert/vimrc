@@ -48,7 +48,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'udalov/kotlin-vim'
 
 " Latex
-Plug 'vim-latex/vim-latex'
+Plug 'lervag/vimtex'
 
 call plug#end()
 filetype plugin indent on
@@ -57,10 +57,10 @@ filetype plugin indent on
 "  | Latex |
 "  |-------|
 let g:tex_flavor='latex'
-let g:Tex_DefaultTargetFormat='pdf'
-command! -nargs=1 Silent
-      \ | execute ':silent !'.<q-args>
-      \ | execute ':redraw!'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 " |-----------|
 " | Syntastic |
@@ -139,6 +139,8 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 " |----------|
 map <c-n> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " |--------|
 " | Denite |
@@ -165,8 +167,7 @@ call denite#custom#map(
 \ 'noremap'
 \)
 call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',
-\ ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
