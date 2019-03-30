@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
@@ -9,12 +8,17 @@ Plug 'alvan/vim-closetag'
 Plug 'junegunn/limelight.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
+Plug 'junegunn/vim-emoji'
 Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
+
+" Denite
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'Shougo/denite.nvim'
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -49,6 +53,13 @@ Plug 'udalov/kotlin-vim'
 
 " Latex
 Plug 'lervag/vimtex'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+
+" Haskell
+Plug 'neovimhaskell/haskell-vim'
+Plug 'enomsg/vim-haskellConcealPlus'
 
 call plug#end()
 filetype plugin indent on
@@ -174,3 +185,9 @@ call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
+
+" |-------|
+" | Emoji |
+" |-------|
+set completefunc=emoji#complete
+nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
