@@ -11,9 +11,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/vim-emoji'
 Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-projectionist'
 
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -25,8 +27,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Git
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -37,13 +39,15 @@ Plug 'pangloss/vim-javascript'
 
 " Laravel
 Plug 'jwalton512/vim-blade'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
 Plug 'noahfrederick/vim-composer'
 Plug 'noahfrederick/vim-laravel'
 
 " PHP
-Plug '2072/PHP-Indenting-for-VIm'
+Plug 'arnaud-lb/vim-php-namespace'
+" Plug 'stephpy/vim-php-cs-fixer'
+" Plug '2072/PHP-Indenting-for-VIm'
+" Plug 'beanworks/vim-phpfmt'
+" Plug 'stanangeloff/php.vim'
 
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
@@ -191,3 +195,11 @@ nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
 " |-------|
 set completefunc=emoji#complete
 nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
+
+Plug 'Valloric/YouCompleteMe', { 'on': [] }
+
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('YouCompleteMe')
+                     \| autocmd! load_us_ycm
+augroup END

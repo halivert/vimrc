@@ -1,3 +1,2 @@
-if (&ft!='blade.php.html')
-  setlocal filetype=blade.php.html
-endif
+set sw=4
+set ts=4
