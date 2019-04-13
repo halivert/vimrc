@@ -1,0 +1,30 @@
+snippet opciones "Opciones para peticiones"
+$opciones = array(
+	'http' => array(
+		'method' => '$1',
+		'header' => 'Cookie: ' . $_SERVER['HTTP_COOKIE']
+	)
+);
+endsnippet
+
+snippet array "Arreglo"
+array($0);
+endsnippet
+
+snippet while "While loop"
+while ($1)
+{
+	$0
+}
+endsnippet
+
+snippet method "Method"
+public function $1($2)
+{
+	$0
+}
+endsnippet
+
+snippet prop "Property"
+protected ${1:\$property} = $0;
+endsnippet

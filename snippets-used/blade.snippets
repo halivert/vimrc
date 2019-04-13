@@ -1,0 +1,17 @@
+extends html, php
+
+snippet foreach "Blade foreach"
+@foreach (${1:\$items} as ${2:\$item})
+	$0
+@endforeach
+endsnippet
+
+snippet {{ "Blade echo" iA
+{{ $1 }}$0
+endsnippet
+
+snippet if "Blade if"
+@if ($1)
+	$0
+@endif
+endsnippet
