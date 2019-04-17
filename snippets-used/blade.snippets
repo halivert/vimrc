@@ -1,7 +1,7 @@
 extends html, php
 
 snippet foreach "Blade foreach"
-@foreach (${1:\$items} as ${2:\$item})
+@foreach (\$${1:items} as \$${2:item})
 	$0
 @endforeach
 endsnippet

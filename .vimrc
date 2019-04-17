@@ -55,8 +55,6 @@ augroup END
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
-cmap w!! w !sudo tee > /dev/null %
-
 imap `? ¿
 imap `! ¡
 
@@ -85,3 +83,4 @@ nmap <C-_> :bd<CR>
 set tags+=./.git/tags;
 
 set keywordprg=online-search
+set foldmethod=indent
