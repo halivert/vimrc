@@ -52,11 +52,14 @@ augroup autosourcing
   autocmd BufWritePost .vimrc source %
 augroup END
 
+set viewoptions-=options
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
 imap `? ¿
 imap `! ¡
+imap `<< «
+imap `>> »
 
 if (exists('+colorcolumn'))
   set colorcolumn=73
@@ -74,13 +77,13 @@ endif
 set lazyredraw
 set regexpengine=1
 
-command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
 let g:vue_disable_pre_processors=1
 set updatetime=100
 nmap <C-S> :tabe<CR>
 nmap <C-_> :bd<CR>
 
 set tags+=./.git/tags;
+nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
 set keywordprg=online-search
 set foldmethod=indent
