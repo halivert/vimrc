@@ -26,7 +26,7 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=72
+set textwidth=78
 set diffopt=vertical
 set emo
 let g:PHP_removeCRwhenUnix=1
@@ -62,8 +62,8 @@ imap `<< «
 imap `>> »
 
 if (exists('+colorcolumn'))
-  set colorcolumn=73
-  highlight ColorColumn guibg=#5f8700 ctermbg=0
+  set colorcolumn=79
+  highlight ColorColumn guibg=#5f8700 ctermbg=8
 endif
 
 let g:elite_mode=1
@@ -87,3 +87,4 @@ nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
 set keywordprg=online-search
 set foldmethod=indent
+highlight Normal ctermbg=none

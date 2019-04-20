@@ -43,10 +43,6 @@ Plug 'noahfrederick/vim-laravel'
 
 " PHP
 Plug 'arnaud-lb/vim-php-namespace'
-" Plug 'stephpy/vim-php-cs-fixer'
-" Plug '2072/PHP-Indenting-for-VIm'
-" Plug 'beanworks/vim-phpfmt'
-" Plug 'stanangeloff/php.vim'
 
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
@@ -63,6 +59,9 @@ Plug 'rust-lang/rust.vim'
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'enomsg/vim-haskellConcealPlus'
+
+" Frontend
+Plug 'mattn/emmet-vim'
 
 call plug#end()
 filetype plugin indent on
