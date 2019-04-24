@@ -62,6 +62,7 @@ Plug 'enomsg/vim-haskellConcealPlus'
 
 " Frontend
 Plug 'mattn/emmet-vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 call plug#end()
 filetype plugin indent on
