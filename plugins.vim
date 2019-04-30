@@ -189,16 +189,16 @@ call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
 
-" |-------|
-" | Emoji |
-" |-------|
-set completefunc=emoji#complete
-nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
-
 Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
 augroup load_us_ycm
   autocmd!
   autocmd InsertEnter * call plug#load('YouCompleteMe')
                      \| autocmd! load_us_ycm
+  set completefunc=emoji#complete
 augroup END
+
+" |-------|
+" | Emoji |
+" |-------|
+nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
