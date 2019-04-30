@@ -26,12 +26,12 @@ snippet ques "Question"
 ¿$1?
 endsnippet
 
-snippet msk "Med skip" A
-\\\\\medskip
+snippet msk "Med skip" iA
+\medskip\\\\
 endsnippet
 
 snippet ssk "Small skip" A
-\\\\\smallskip
+\smallskip\\\\
 endsnippet
 
 snippet article "Basic article template"
@@ -138,6 +138,6 @@ snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
 `
 endsnippet
 
-snippet bsk "Base line skip" A
+snippet bsk "Base line skip" iA
 \\\[\baselineskip]
 endsnippet
