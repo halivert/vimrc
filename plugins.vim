@@ -202,3 +202,9 @@ augroup END
 " | Emoji |
 " |-------|
 nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
+
+" |----------|
+" | Closetag |
+" |----------|
+let g:closetag_filetypes = 'html,xhtml,phtml,blade'
+
