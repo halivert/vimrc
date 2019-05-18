@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/syntastic'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -10,11 +10,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/vim-emoji'
 Plug 'posva/vim-vue'
-Plug 'tpope/vim-commentary'
+Plug 'tyru/caw.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
+Plug 'Shougo/context_filetype.vim'
 
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -34,31 +35,31 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Javascript
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Laravel
-Plug 'jwalton512/vim-blade'
-Plug 'noahfrederick/vim-composer'
-Plug 'noahfrederick/vim-laravel'
+Plug 'jwalton512/vim-blade', { 'for': 'php' }
+Plug 'noahfrederick/vim-composer', { 'for': 'php' }
+Plug 'noahfrederick/vim-laravel', { 'for': 'php' }
 
 " PHP
-Plug 'arnaud-lb/vim-php-namespace'
+Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
 
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
 
 " Kotlin
-Plug 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 
 " Latex
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " Haskell
-Plug 'neovimhaskell/haskell-vim'
-Plug 'enomsg/vim-haskellConcealPlus'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
 
 " Frontend
 Plug 'mattn/emmet-vim'
@@ -206,5 +207,5 @@ nmap <leader>emoji :%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
 " |----------|
 " | Closetag |
 " |----------|
-let g:closetag_filetypes = 'html,xhtml,phtml,blade'
-
+let g:closetag_filetypes = 'html,xhtml,phtml,blade,vue'
+call context_filetype#version()
