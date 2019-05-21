@@ -29,12 +29,11 @@ set wildmenu
 set hlsearch
 set textwidth=78
 set diffopt=vertical
-set emo
 let g:PHP_removeCRwhenUnix=1
 let w:solarized_style='dark'
 set t_Co=256
-colo solarized
-set background=dark
+colorscheme solarized
+" set background=light
 
 if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
@@ -88,4 +87,4 @@ nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
 set keywordprg=online-search
 set foldmethod=indent
-highlight Normal ctermbg=none
+highlight Normal ctermbg=none    " Change background to transparent
