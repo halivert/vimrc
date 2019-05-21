@@ -10,7 +10,8 @@ so ~/.vim/functions.vim
 set showcmd
 set rnu
 set nu
-syntax on
+" syntax on
+syntax enable
 
 let mapleader = '`'
 " Window is put bellow current one
