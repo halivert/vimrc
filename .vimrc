@@ -88,3 +88,6 @@ nnoremap <leader>c :silent! !git ctags<cr><C-L>
 set keywordprg=online-search
 set foldmethod=indent
 highlight Normal ctermbg=none
+
+set undofile
+set undodir=~/.vim/undodir
