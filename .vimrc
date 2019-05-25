@@ -6,6 +6,7 @@ endif
 
 so ~/.vim/plugins.vim
 so ~/.vim/functions.vim
+so ~/.vim/secret.vim
 
 set showcmd
 set rnu
