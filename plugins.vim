@@ -9,7 +9,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/vim-emoji'
-Plug 'posva/vim-vue'
 Plug 'tyru/caw.vim'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
@@ -29,6 +28,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Vue
+Plug 'posva/vim-vue', { 'for': 'vue' }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -189,15 +191,6 @@ call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
 nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
-
-Plug 'Valloric/YouCompleteMe', { 'on': [] }
-
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('YouCompleteMe')
-                     \| autocmd! load_us_ycm
-  set completefunc=emoji#complete
-augroup END
 
 " |-------|
 " | Emoji |
