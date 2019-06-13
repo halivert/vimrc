@@ -14,7 +14,7 @@ set nu
 " syntax on
 syntax enable
 
-let mapleader = '`'
+let mapleader='`'
 " Window is put bellow current one
 set sb
 " Windows is put right of the current one
@@ -47,11 +47,6 @@ nmap <leader>y "+y
 nmap <leader>p "+p
 vnoremap <leader>y "+y
 vnoremap <leader>p "+p
-
-augroup autosourcing
-  autocmd!
-  autocmd BufWritePost .vimrc source %
-augroup END
 
 set viewoptions-=options
 autocmd BufWinLeave *.* mkview
@@ -92,3 +87,9 @@ highlight Normal ctermbg=none    " Change background to transparent
 
 set undofile
 set undodir=~/.vim/undodir
+
+" netrw
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_browse_split=3
+let g:netrw_winsize=25
