@@ -14,6 +14,9 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 Plug 'Shougo/context_filetype.vim'
 
+" YCM
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'on': [] }
+
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'roxma/nvim-yarp'
@@ -152,24 +155,6 @@ let g:closetag_filenames='*.html,*.xhtml,*.phtml'
 " |--------|
 " | Denite |
 " |--------|
-" call denite#custom#map(
-"      \ 'insert',
-"      \ '<C-J>',
-"      \ '<denite:move_to_next_line>',
-"      \ 'noremap'
-"      \)
-" call denite#custom#map(
-"      \ 'insert',
-"      \ '<C-K>',
-"      \ '<denite:move_to_previous_line>',
-"      \ 'noremap'
-"      \)
-" call denite#custom#map(
-"      \ 'insert',
-"      \ '<C-T>',
-"      \ '<denite:do_action:tabopen>',
-"      \ 'noremap'
-"      \)
 call denite#custom#var('file/rec', 'command',
       \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 

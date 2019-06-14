@@ -11,7 +11,6 @@ so ~/.vim/secret.vim
 set showcmd
 set rnu
 set nu
-" syntax on
 syntax enable
 
 let mapleader='`'
@@ -81,9 +80,8 @@ nmap <C-_> :bd<CR>
 set tags+=./.git/tags;
 nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
-set keywordprg=online-search
+set keywordprg=:!online-search
 set foldmethod=indent
-" highlight Normal ctermbg=none    " Change background to transparent
 nmap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
 
 let g:background_transparent=0
