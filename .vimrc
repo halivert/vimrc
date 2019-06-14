@@ -83,7 +83,19 @@ nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
 set keywordprg=online-search
 set foldmethod=indent
-highlight Normal ctermbg=none    " Change background to transparent
+" highlight Normal ctermbg=none    " Change background to transparent
+nmap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
+
+let g:background_transparent=0
+function! ToggleBackgroundTransparency()
+  if g:background_transparent
+    highlight Normal ctermbg=233
+    let g:background_transparent=0
+  else
+    highlight Normal ctermbg=none
+    let g:background_transparent=1
+  endif
+endfunction
 
 set undofile
 set undodir=~/.vim/undodir

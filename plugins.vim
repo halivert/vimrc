@@ -152,32 +152,45 @@ let g:closetag_filenames='*.html,*.xhtml,*.phtml'
 " |--------|
 " | Denite |
 " |--------|
+" call denite#custom#map(
+"      \ 'insert',
+"      \ '<C-J>',
+"      \ '<denite:move_to_next_line>',
+"      \ 'noremap'
+"      \)
+" call denite#custom#map(
+"      \ 'insert',
+"      \ '<C-K>',
+"      \ '<denite:move_to_previous_line>',
+"      \ 'noremap'
+"      \)
+" call denite#custom#map(
+"      \ 'insert',
+"      \ '<C-T>',
+"      \ '<denite:do_action:tabopen>',
+"      \ 'noremap'
+"      \)
 call denite#custom#var('file/rec', 'command',
-      \ ['ag', '--follow', '--nogroup', '-g', ''])
-call denite#custom#option('default', 'prompt', '>')
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-J>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-K>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-T>',
-      \ '<denite:do_action:tabopen>',
-      \ 'noremap'
-      \)
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+        \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+        \ denite#do_map('do_action', 'preview')
   nnoremap <silent><buffer><expr> q
         \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+        \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> t
+        \ denite#do_map('do_action', 'tabopen')
+  nnoremap <silent><buffer><expr> <Space>
+        \ denite#do_map('toggle_select').'j'
 endfunction
+
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
@@ -185,7 +198,39 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-nnoremap <silent> <space><space> :Denite buffer file/rec<cr>
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
+  inoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+  inoremap <silent><buffer><expr> <c-t>
+        \ denite#do_map('do_action', 'tabopen')
+  inoremap <silent><buffer><expr> <c-v>
+        \ denite#do_map('do_action', 'vsplit')
+  inoremap <silent><buffer><expr> <c-x>
+        \ denite#do_map('do_action', 'split')
+  inoremap <silent><buffer><expr> <esc>
+       \ denite#do_map('quit')
+  inoremap <silent><buffer> <C-j>
+        \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+  inoremap <silent><buffer> <C-k>
+        \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+endfunction
+
+let s:denite_options = {
+      \ 'prompt' : '>',
+      \ 'start_filter': 1,
+      \ 'source_names': 'short',
+      \ 'winheight': 12,
+      \ 'direction': 'botright',
+      \ 'highlight_filter_background': 'CursorLine',
+      \ 'highlight_matched_char': 'Type',
+      \ }
+
+call denite#custom#option('default', s:denite_options)
+
+nnoremap <silent> <space><space>
+      \ :Denite buffer file/rec<cr>
 
 " |----------|
 " | Closetag |
