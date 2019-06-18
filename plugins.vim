@@ -15,7 +15,9 @@ Plug 'tpope/vim-projectionist'
 Plug 'Shougo/context_filetype.vim'
 
 " YCM
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py', 'on': [] }
+Plug 'Valloric/YouCompleteMe', {
+      \ 'do': 'python3 install.py --clang-completer'
+      \ }
 
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -114,6 +116,7 @@ let g:vim_markdown_frontmatter=1
 " |----------|
 " | Snippets |
 " |----------|
+nmap <leader>es :UltiSnipsEdit<cr>
 let g:UltiSnipsUsePythonVersion=3
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<TAB>"
@@ -222,3 +225,8 @@ nnoremap <silent> <space><space>
 " |----------|
 let g:closetag_filetypes='html,xhtml,phtml,blade,vue'
 call context_filetype#version()
+
+" |-----|
+" | Vue |
+" |-----|
+let g:vue_disable_pre_processors=1
