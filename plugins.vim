@@ -13,6 +13,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-projectionist'
 Plug 'Shougo/context_filetype.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " YCM
 Plug 'Valloric/YouCompleteMe', {
@@ -90,7 +91,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=0
+let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 
@@ -147,7 +148,7 @@ let g:table_mode_tableize_map='<Leader>tz'
 " |---------|
 " | Airline |
 " |---------|
-let g:airline_theme='bubblegum'
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
 
 " |------------|
@@ -230,3 +231,8 @@ call context_filetype#version()
 " | Vue |
 " |-----|
 let g:vue_disable_pre_processors=1
+
+" |-----------|
+" | Solarized |
+" |-----------|
+silent! call togglebg#map("<F5>")
