@@ -37,12 +37,20 @@ if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
 endif
 
+set nobackup
+set nowritebackup
+set shortmess+=c
+set signcolumn=yes
+
 nnoremap Q <nop>
 nmap <leader>ev :tabedit ~/.vimrc<cr>
+nmap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
 vnoremap <leader>y "+y
 vnoremap <leader>p "+p
+
+nnoremap <leader># :so $MYVIMRC<cr>
 
 set viewoptions=folds,cursor
 augroup AutoSaveFolds
@@ -80,7 +88,6 @@ nmap <C-_> :bd<CR>
 set tags+=./.git/tags;
 nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
-set foldmethod=indent
 nmap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
 
 function! ToggleBackgroundTransparency()
@@ -96,3 +103,5 @@ endfunction
 set undofile
 set undodir=~/.vim/undodir
 cno help tab help
+
+nmap <silent> <leader>dd <Plug>(coc-definition)

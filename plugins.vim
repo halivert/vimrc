@@ -15,10 +15,13 @@ Plug 'tpope/vim-projectionist'
 Plug 'Shougo/context_filetype.vim'
 Plug 'altercation/vim-colors-solarized'
 
+" Coc
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
 " YCM
-Plug 'Valloric/YouCompleteMe', {
-      \ 'do': 'python3 install.py --clang-completer'
-      \ }
+" Plug 'Valloric/YouCompleteMe', {
+"      \ 'do': 'python3 install.py --clang-completer'
+"      \ }
 
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -117,7 +120,6 @@ let g:vim_markdown_frontmatter=1
 " |----------|
 " | Snippets |
 " |----------|
-nmap <leader>es :UltiSnipsEdit<cr>
 let g:UltiSnipsUsePythonVersion=3
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<TAB>"
@@ -129,10 +131,10 @@ let g:UltiSnipsEditSplit="vertical"
 " |-----|
 " | YCM |
 " |-----|
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-let g:ycm_show_diagnostics_ui=0
-let g:ycm_global_ycm_extra_conf="~/.vim/ycm/.ycm_extra_conf.py"
+" let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+" let g:ycm_show_diagnostics_ui=0
+" let g:ycm_global_ycm_extra_conf="~/.vim/ycm/.ycm_extra_conf.py"
 
 " |----------|
 " | Mustache |
@@ -199,7 +201,7 @@ function! s:denite_filter_my_settings() abort
   inoremap <silent><buffer><expr> <c-x>
         \ denite#do_map('do_action', 'split')
   inoremap <silent><buffer><expr> <esc>
-       \ denite#do_map('quit')
+        \ denite#do_map('quit')
   inoremap <silent><buffer> <C-j>
         \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
   inoremap <silent><buffer> <C-k>
@@ -207,14 +209,19 @@ function! s:denite_filter_my_settings() abort
 endfunction
 
 let s:denite_options = {
-      \ 'prompt' : '>',
-      \ 'start_filter': 1,
-      \ 'source_names': 'short',
-      \ 'winheight': 12,
-      \ 'direction': 'botright',
-      \ 'highlight_filter_background': 'CursorLine',
-      \ 'highlight_matched_char': 'Type',
-      \ }
+     \ 'auto_resize': 1,
+     \ 'prompt': 'λ ',
+     \ 'start_filter': 1,
+     \ 'source_names': 'short',
+     \ 'winheight': 10,
+     \ 'winwidth': 80,
+     \ 'split': 'floating',
+     \ 'wincol': 45,
+     \ 'winrow': 3,
+     \ 'direction': 'topleft',
+     \ 'highlight_filter_background': 'CursorLine',
+     \ 'highlight_window_background': 'Type',
+     \ }
 
 call denite#custom#option('default', s:denite_options)
 
@@ -236,3 +243,20 @@ let g:vue_disable_pre_processors=1
 " | Solarized |
 " |-----------|
 silent! call togglebg#map("<F5>")
+
+" |-----|
+" | Coc |
+" |-----|
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+command! -nargs=0 Format :call CocAction('format')
