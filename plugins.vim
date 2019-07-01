@@ -15,6 +15,9 @@ Plug 'tpope/vim-projectionist'
 Plug 'Shougo/context_filetype.vim'
 Plug 'altercation/vim-colors-solarized'
 
+" Prettier
+Plug 'sbdchd/neoformat'
+
 " Coc
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
@@ -94,7 +97,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 
@@ -103,7 +106,6 @@ let g:syntastic_cpp_compiler_options="`pkg-config gtkmm-3.0 --libs --cflags`"
 let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-', 'trimming empty \<']
 let g:syntastic_ignore_files=['\m\c\.xml$', '\m\c\.ts$']
 let g:syntastic_python_checkers=['pylint']
-let NERDTreeShowHidden=1
 
 " |-----------|
 " | Limelight |
@@ -260,3 +262,4 @@ endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')

@@ -41,6 +41,8 @@ set nobackup
 set nowritebackup
 set shortmess+=c
 set signcolumn=yes
+set pyxversion=3
+set hidden
 
 nnoremap Q <nop>
 nmap <leader>ev :tabedit ~/.vimrc<cr>
@@ -103,5 +105,3 @@ endfunction
 set undofile
 set undodir=~/.vim/undodir
 cno help tab help
-
-nmap <silent> <leader>dd <Plug>(coc-definition)
