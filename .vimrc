@@ -45,14 +45,14 @@ set pyxversion=3
 set hidden
 
 nnoremap Q <nop>
-nmap <leader>ev :tabedit ~/.vimrc<cr>
-nmap <leader>es :UltiSnipsEdit<cr>
+nmap <leader>ev ;tabedit ~/.vimrc<cr>
+nmap <leader>es ;UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
 vnoremap <leader>y "+y
 vnoremap <leader>p "+p
 
-nnoremap <leader># :so $MYVIMRC<cr>
+nnoremap <leader># ;so $MYVIMRC<cr>
 
 set viewoptions=folds,cursor
 augroup AutoSaveFolds
@@ -84,13 +84,13 @@ set regexpengine=1
 set keywordprg=online-search
 
 set updatetime=100
-nmap <C-S> :tabe<CR>
-nmap <C-_> :bd<CR>
+nmap <C-S> ;tabe<CR>
+nmap <C-_> ;bd<CR>
 
 set tags+=./.git/tags;
-nnoremap <leader>c :silent! !git ctags<cr><C-L>
+nnoremap <leader>c ;silent! !git ctags<cr><C-L>
 
-nmap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
+nmap <silent><leader>tc ;call ToggleBackgroundTransparency()<cr>
 
 function! ToggleBackgroundTransparency()
   if g:solarized_termtrans
@@ -105,3 +105,5 @@ endfunction
 set undofile
 set undodir=~/.vim/undodir
 cno help tab help
+noremap ; :
+noremap : ;

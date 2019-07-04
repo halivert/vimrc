@@ -154,6 +154,11 @@ let g:table_mode_tableize_map='<Leader>tz'
 " |---------|
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#show_close_button = 0
 
 " |------------|
 " | Close tags |
@@ -180,8 +185,8 @@ function! s:denite_my_settings() abort
         \ denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> t
         \ denite#do_map('do_action', 'tabopen')
-  nnoremap <silent><buffer><expr> <Space>
-        \ denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer><expr> <space>
+        \ denite#do_map('toggle_select')
 endfunction
 
 call denite#custom#var('grep', 'command', ['ag'])

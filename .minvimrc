@@ -1,0 +1,5 @@
+" swapping : and ; save a lot of unneeded shifting:
+noremap ; :
+noremap : ;
+set nu
+set rnu
