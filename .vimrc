@@ -17,7 +17,7 @@ let mapleader='`'
 set splitbelow
 set splitright
 set autoindent
-set expandtab
+set noexpandtab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
@@ -31,6 +31,7 @@ set t_Co=256
 
 set background=dark
 let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colorscheme solarized
 
 if has('gui_running')
@@ -45,14 +46,14 @@ set pyxversion=3
 set hidden
 
 nnoremap Q <nop>
-nmap <leader>ev ;tabedit ~/.vimrc<cr>
-nmap <leader>es ;UltiSnipsEdit<cr>
+nnoremap <leader>ev :tabedit ~/.vimrc<cr>
+nnoremap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
 vnoremap <leader>y "+y
 vnoremap <leader>p "+p
 
-nnoremap <leader># ;so $MYVIMRC<cr>
+nnoremap <leader># :so $MYVIMRC<cr>
 
 set viewoptions=folds,cursor
 augroup AutoSaveFolds
@@ -84,13 +85,13 @@ set regexpengine=1
 set keywordprg=online-search
 
 set updatetime=100
-nmap <C-S> ;tabe<CR>
-nmap <C-_> ;bd<CR>
+nnoremap <C-S> :tabe<CR>
+nnoremap <C-_> :bd<CR>
 
 set tags+=./.git/tags;
-nnoremap <leader>c ;silent! !git ctags<cr><C-L>
+nnoremap <leader>c :silent! !git ctags<cr><C-L>
 
-nmap <silent><leader>tc ;call ToggleBackgroundTransparency()<cr>
+nnoremap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
 
 function! ToggleBackgroundTransparency()
   if g:solarized_termtrans

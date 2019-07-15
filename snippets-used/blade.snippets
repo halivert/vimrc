@@ -33,3 +33,7 @@ snippet @section "Section tag"
 	$0
 @endsection
 endsnippet
+
+snippet i@section "Inline section tag"
+@section($1, ${0:$1})
+endsnippet

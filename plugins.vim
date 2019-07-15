@@ -1,18 +1,18 @@
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/syntastic'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'alvan/vim-closetag'
 Plug 'junegunn/limelight.vim'
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular' " Needed for plasticboy/vim-markdown
 Plug 'plasticboy/vim-markdown'
-Plug 'tyru/caw.vim'
+Plug 'tpope/vim-commentary'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
-Plug 'Shougo/context_filetype.vim'
+" Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-projectionist'
+" Plug 'Shougo/context_filetype.vim'
+Plug 'suy/vim-context-commentstring'
 Plug 'altercation/vim-colors-solarized'
 
 " Prettier
@@ -80,15 +80,6 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 filetype plugin indent on
 
-"  |-------|
-"  | Latex |
-"  |-------|
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-
 " |-----------|
 " | Syntastic |
 " |-----------|
@@ -107,6 +98,12 @@ let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-', 'trimming
 let g:syntastic_ignore_files=['\m\c\.xml$', '\m\c\.ts$']
 let g:syntastic_python_checkers=['pylint']
 
+" |----------|
+" | Closetag |
+" |----------|
+let g:closetag_filenames='*.html,*.xhtml,*.phtml'
+let g:closetag_filetypes='html,xhtml,phtml,blade,vue'
+
 " |-----------|
 " | Limelight |
 " |-----------|
@@ -118,6 +115,27 @@ let g:limelight_default_coefficient=0.7
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
 let g:vim_markdown_frontmatter=1
+
+" |------------|
+" | Table mode |
+" |------------|
+let g:table_mode_tableize_map='<Leader>tz'
+
+" |-------|
+" | Blade |
+" |-------|
+let g:blade_custom_directives_pairs = {
+      \   'cache': 'endcache',
+      \ }
+
+"  |-------|
+"  | Latex |
+"  |-------|
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 " |----------|
 " | Snippets |
@@ -143,12 +161,6 @@ let g:UltiSnipsEditSplit="vertical"
 " |----------|
 let mustache_abreviations=1
 
-" |------------|
-" | Table mode |
-" |------------|
-let g:table_mode_corner='|'
-let g:table_mode_tableize_map='<Leader>tz'
-
 " |---------|
 " | Airline |
 " |---------|
@@ -159,11 +171,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_close_button = 0
-
-" |------------|
-" | Close tags |
-" |------------|
-let g:closetag_filenames='*.html,*.xhtml,*.phtml'
 
 " |--------|
 " | Denite |
@@ -185,6 +192,8 @@ function! s:denite_my_settings() abort
         \ denite#do_map('open_filter_buffer')
   nnoremap <silent><buffer><expr> t
         \ denite#do_map('do_action', 'tabopen')
+  nnoremap <silent><buffer><expr> v
+        \ denite#do_map('do_action', 'vsplit')
   nnoremap <silent><buffer><expr> <space>
         \ denite#do_map('toggle_select')
 endfunction
@@ -235,12 +244,6 @@ call denite#custom#option('default', s:denite_options)
 nnoremap <silent> <space><space>
       \ :Denite buffer file/rec<cr>
 
-" |----------|
-" | Closetag |
-" |----------|
-let g:closetag_filetypes='html,xhtml,phtml,blade,vue'
-call context_filetype#version()
-
 " |-----|
 " | Vue |
 " |-----|
@@ -268,3 +271,4 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" call context_filetype#version()
