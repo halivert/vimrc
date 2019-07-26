@@ -14,6 +14,7 @@ Plug 'nelstrom/vim-visual-star-search'
 " Plug 'Shougo/context_filetype.vim'
 Plug 'suy/vim-context-commentstring'
 Plug 'altercation/vim-colors-solarized'
+Plug 'ntpeters/vim-better-whitespace'
 
 " Prettier
 Plug 'sbdchd/neoformat'
@@ -253,6 +254,12 @@ let g:vue_disable_pre_processors=1
 " | Solarized |
 " |-----------|
 silent! call togglebg#map("<F5>")
+
+" |-------------------|
+" | Better whitespace |
+" |-------------------|
+nnoremap <leader>s :StripWhitespace
+let g:better_whitespace_operator='_s'
 
 " |-----|
 " | Coc |
