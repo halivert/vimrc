@@ -36,7 +36,6 @@ endif
 set nobackup
 set nowritebackup
 set shortmess+=c
-set signcolumn=yes
 set pyxversion=3
 set hidden
 

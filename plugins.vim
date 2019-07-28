@@ -173,6 +173,11 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_close_button = 0
 
+" |-----------|
+" | Gitgutter |
+" |-----------|
+set signcolumn=yes
+
 " |--------|
 " | Denite |
 " |--------|
