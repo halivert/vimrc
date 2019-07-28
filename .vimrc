@@ -41,7 +41,6 @@ set pyxversion=3
 set hidden
 
 nnoremap Q <nop>
-nnoremap <leader>ev :tabedit $HOME/.vimrc<cr>
 nnoremap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
@@ -99,7 +98,11 @@ function! ToggleBackgroundTransparency()
 endfunction
 
 set undofile
-set undodir=$HOME/.vim/undodir
 cno help tab help
 noremap ; :
 noremap : ;
+
+set undodir=$HOME/.vim/undodir
+if exists("configPath")
+	execute "nnoremap <leader>ev :tabedit " . configPath . "/.vimrc"
+endif

@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('$HOME/.vim/plugged')
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -243,7 +243,7 @@ let s:denite_options = {
 call denite#custom#option('default', s:denite_options)
 
 nnoremap <silent> <space><space>
-      \ :Denite buffer file/rec<cr>
+      \ :Denite buffer file/rec
 
 " |-----|
 " | Vue |
