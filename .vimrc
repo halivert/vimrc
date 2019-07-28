@@ -4,10 +4,6 @@ if exists('py2') && has('python')
 elseif has('python3')
 endif
 
-so ~/.vim/plugins.vim
-so ~/.vim/functions.vim
-so ~/.vim/secret.vim
-
 set showcmd
 set relativenumber
 set number
@@ -32,7 +28,6 @@ set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-colorscheme solarized
 
 if has('gui_running')
   set guifont=IBM\ Plex\ Mono\ 11
@@ -46,7 +41,7 @@ set pyxversion=3
 set hidden
 
 nnoremap Q <nop>
-nnoremap <leader>ev :tabedit ~/.vimrc<cr>
+nnoremap <leader>ev :tabedit $HOME/.vimrc<cr>
 nnoremap <leader>es :UltiSnipsEdit<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
@@ -104,7 +99,7 @@ function! ToggleBackgroundTransparency()
 endfunction
 
 set undofile
-set undodir=~/.vim/undodir
+set undodir=$HOME/.vim/undodir
 cno help tab help
 noremap ; :
 noremap : ;
