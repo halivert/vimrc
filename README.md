@@ -3,8 +3,8 @@
 Este es mi conjunto de archivos de vimrc, con configuraciones por
 archivo y cosas por el estilo.
 
-### Instalación:
-##### Opción 1 (Recomendada)
+## Instalación:
+### Opción 1 (Recomendada)
 Ejecutar el script `install.sh` que creará un archivo `.vimrc` en tu carpeta
 `$HOME`. Dicho script tiene las siguientes opciones:
 
@@ -27,14 +27,14 @@ _**`-a / --all`**_
 _**`-m / --minimal`**_
 >	Agrega solo un archivo con las instrucciones mínimas.
 
-##### Opción 2 (manual)
+### Opción 2 (manual)
 Soft link para cada uno de los siguientes archivos, ejemplo:
 ```bash
 # Si estás en el directorio actual
 ln -s $(pwd)/.vimrc $HOME/.vimrc
 ```
 
-###### Ubicación de los soft links
+#### Ubicación de los soft links
 ```bash
 ~/.bin/online-search # Algún lugar de tu $PATH
 ~/.config/nvim/init.vim # Si usas neovim
