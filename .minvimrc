@@ -1,5 +1,20 @@
+se guicursor=a:hor50-Cursor-blinkwait175-blinkoff150-blinkon175
+
 " swapping : and ; save a lot of unneeded shifting:
-noremap ; :
-noremap : ;
-set nu
-set rnu
+no ; :
+no : ;
+se nu
+se rnu
+se sc
+let mapleader='`'
+se noet
+
+nn Q <nop>
+
+im `? ¿
+im `! ¡
+im `<< «
+im `>> »
+
+nn <C-S> :tabe<CR>
+nn <C-_> :bd<CR>
