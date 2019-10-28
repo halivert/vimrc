@@ -25,12 +25,27 @@ set textwidth=78
 set diffopt=vertical
 set t_Co=256
 
+function! InitialBackground()
+	let l:initial = split("10:00", ":")
+	let l:final = split("19:00", ":")
+	let l:now = split(strftime("%H:%M"), ":")
+
+	let l:initialToNow = ((l:now[0] * 60 + l:now[1]) - (l:initial[0] * 60 + l:initial[1]))
+	let l:nowToFinal = ((l:now[0] * 60 + l:now[1]) - (l:final[0] * 60 + l:final[1]))
+
+	if (l:initialToNow > 0 && l:nowToFinal < 0)
+		set background=light
+	endif
+endfunction
+
 set background=dark
+call InitialBackground()
+
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 
 if has('gui_running')
-  set guifont=IBM\ Plex\ Mono\ 11
+	set guifont=IBM\ Plex\ Mono\ 11
 endif
 
 set nobackup
@@ -50,9 +65,9 @@ nnoremap <leader># :so $MYVIMRC<cr>
 
 set viewoptions=folds,cursor
 augroup AutoSaveFolds
-  autocmd!
-  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview
-  autocmd BufWinEnter ?* silent! loadview
+	autocmd!
+	autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview
+	autocmd BufWinEnter ?* silent! loadview
 augroup end
 
 imap `? ¿
@@ -61,16 +76,16 @@ imap `<< «
 imap `>> »
 
 if (exists('+colorcolumn'))
-  set colorcolumn=79
-  highlight ColorColumn guibg=#5f8700 ctermbg=8
+	set colorcolumn=79
+	highlight ColorColumn guibg=#5f8700 ctermbg=8
 endif
 
 let g:elite_mode=1
 if get(g:, 'elite_mode')
-  nnoremap <Up> <nop>
-  nnoremap <Down> <nop>
-  nnoremap <Left> <nop>
-  nnoremap <Right> <nop>
+	nnoremap <Up> <nop>
+	nnoremap <Down> <nop>
+	nnoremap <Left> <nop>
+	nnoremap <Right> <nop>
 endif
 
 set lazyredraw
@@ -87,13 +102,13 @@ nnoremap <leader>c :silent! !git ctags<cr><C-L>
 nnoremap <silent><leader>tc :call ToggleBackgroundTransparency()<cr>
 
 function! ToggleBackgroundTransparency()
-  if g:solarized_termtrans
-    let g:solarized_termtrans=0
-    colo solarized
-  else
-    let g:solarized_termtrans=1
-    colo solarized
-  endif
+	if g:solarized_termtrans
+		let g:solarized_termtrans=0
+		colo solarized
+	else
+		let g:solarized_termtrans=1
+		colo solarized
+	endif
 endfunction
 
 set undofile

@@ -36,6 +36,7 @@ done
 
 FTPLUGIN=(
 "blade.vim"
+"markdown.vim"
 "gitcommit.vim"
 "haskell.vim"
 "htmldjango.vim"

@@ -9,23 +9,16 @@ Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
-" Plug 'tpope/vim-dispatch'
-" Plug 'tpope/vim-projectionist'
-" Plug 'Shougo/context_filetype.vim'
 Plug 'suy/vim-context-commentstring'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-dispatch'
 
 " Prettier
 Plug 'sbdchd/neoformat'
 
 " Coc
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-
-" YCM
-" Plug 'Valloric/YouCompleteMe', {
-"      \ 'do': 'python3 install.py --clang-completer'
-"      \ }
 
 " Denite
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -51,12 +44,16 @@ Plug 'honza/vim-snippets'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Laravel
-Plug 'jwalton512/vim-blade', { 'for': 'php' }
-Plug 'noahfrederick/vim-composer', { 'for': 'php' }
-Plug 'noahfrederick/vim-laravel', { 'for': 'php' }
+Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
+Plug 'noahfrederick/vim-composer', { 'for': ['php', 'blade'] }
+Plug 'noahfrederick/vim-laravel'
 
 " PHP
-Plug 'arnaud-lb/vim-php-namespace', { 'for': 'php' }
+Plug 'stanangeloff/php.vim', { 'for': 'php' }
+Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'ncm2/ncm2'
+Plug '2072/PHP-Indenting-for-VIm'
 
 " Mustache
 Plug 'mustache/vim-mustache-handlebars'
@@ -77,6 +74,12 @@ Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
 " Frontend
 Plug 'mattn/emmet-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
+" Jekyll
+Plug 'parkr/vim-jekyll'
+
+" Emoji
+Plug 'junegunn/vim-emoji'
 
 call plug#end()
 filetype plugin indent on
@@ -103,7 +106,7 @@ let g:syntastic_python_checkers=['pylint']
 " | Closetag |
 " |----------|
 let g:closetag_filenames='*.html,*.xhtml,*.phtml'
-let g:closetag_filetypes='html,xhtml,phtml,blade,vue'
+let g:closetag_filetypes='html,xhtml,phtml,blade,vue,markdown,liquid'
 
 " |-----------|
 " | Limelight |
@@ -122,12 +125,15 @@ let g:vim_markdown_frontmatter=1
 " |------------|
 let g:table_mode_tableize_map='<Leader>tz'
 
-" |-------|
-" | Blade |
-" |-------|
+" |---------|
+" | Laravel |
+" |---------|
+let g:blade_custom_directives = ['tovue']
 let g:blade_custom_directives_pairs = {
-      \   'cache': 'endcache',
-      \ }
+			\   'cache': 'endcache',
+			\ }
+let g:php_html_load=0
+let g:php_sql_query=0
 
 "  |-------|
 "  | Latex |
@@ -143,19 +149,11 @@ let g:tex_conceal='abdmg'
 " |----------|
 let g:UltiSnipsUsePythonVersion=3
 let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<TAB>"
-let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=['/home/hali/.vim/snippets-used']
 let g:jsx_ext_required=0
 let g:UltiSnipsEditSplit="vertical"
-
-" |-----|
-" | YCM |
-" |-----|
-" let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-" let g:ycm_show_diagnostics_ui=0
-" let g:ycm_global_ycm_extra_conf="~/.vim/ycm/.ycm_extra_conf.py"
 
 " |----------|
 " | Mustache |
@@ -182,26 +180,26 @@ set signcolumn=yes
 " | Denite |
 " |--------|
 call denite#custom#var('file/rec', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+			\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-        \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-        \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-        \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-        \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-        \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> t
-        \ denite#do_map('do_action', 'tabopen')
-  nnoremap <silent><buffer><expr> v
-        \ denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> <space>
-        \ denite#do_map('toggle_select')
+	nnoremap <silent><buffer><expr> <cr>
+				\ denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> d
+				\ denite#do_map('do_action', 'delete')
+	nnoremap <silent><buffer><expr> p
+				\ denite#do_map('do_action', 'preview')
+	nnoremap <silent><buffer><expr> q
+				\ denite#do_map('quit')
+	nnoremap <silent><buffer><expr> i
+				\ denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> t
+				\ denite#do_map('do_action', 'tabopen')
+	nnoremap <silent><buffer><expr> v
+				\ denite#do_map('do_action', 'vsplit')
+	nnoremap <silent><buffer><expr> <space>
+				\ denite#do_map('toggle_select')
 endfunction
 
 call denite#custom#var('grep', 'command', ['ag'])
@@ -213,42 +211,42 @@ call denite#custom#var('grep', 'final_opts', [])
 
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
-  imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
-  inoremap <silent><buffer><expr> <CR>
-        \ denite#do_map('do_action')
-  inoremap <silent><buffer><expr> <c-t>
-        \ denite#do_map('do_action', 'tabopen')
-  inoremap <silent><buffer><expr> <c-v>
-        \ denite#do_map('do_action', 'vsplit')
-  inoremap <silent><buffer><expr> <c-x>
-        \ denite#do_map('do_action', 'split')
-  inoremap <silent><buffer><expr> <esc>
-        \ denite#do_map('quit')
-  inoremap <silent><buffer> <C-j>
-        \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-  inoremap <silent><buffer> <C-k>
-        \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+	imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
+	inoremap <silent><buffer><expr> <cr>
+				\ denite#do_map('do_action')
+	inoremap <silent><buffer><expr> <c-t>
+				\ denite#do_map('do_action', 'tabopen')
+	inoremap <silent><buffer><expr> <c-v>
+				\ denite#do_map('do_action', 'vsplit')
+	inoremap <silent><buffer><expr> <c-x>
+				\ denite#do_map('do_action', 'split')
+	inoremap <silent><buffer><expr> <esc>
+				\ denite#do_map('quit')
+	inoremap <silent><buffer> <C-j>
+				\ <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
+	inoremap <silent><buffer> <C-k>
+				\ <Esc><C-w>p:call cursor(line('.')-1,0)<cr><C-w>pA
 endfunction
 
 let s:denite_options = {
-     \ 'auto_resize': 1,
-     \ 'prompt': 'λ ',
-     \ 'start_filter': 1,
-     \ 'source_names': 'short',
-     \ 'winheight': 10,
-     \ 'winwidth': 80,
-     \ 'split': 'floating',
-     \ 'wincol': 45,
-     \ 'winrow': 3,
-     \ 'direction': 'topleft',
-     \ 'highlight_filter_background': 'CursorLine',
-     \ 'highlight_window_background': 'Type',
-     \ }
+			\ 'auto_resize': 1,
+			\ 'prompt': 'λ ',
+			\ 'start_filter': 1,
+			\ 'source_names': 'short',
+			\ 'winheight': 10,
+			\ 'winwidth': 80,
+			\ 'split': 'floating',
+			\ 'wincol': 45,
+			\ 'winrow': 3,
+			\ 'direction': 'topleft',
+			\ 'highlight_filter_background': 'CursorLine',
+			\ 'highlight_window_background': 'Type',
+			\ }
 
 call denite#custom#option('default', s:denite_options)
 
 nnoremap <silent> <space><space>
-      \ :Denite buffer file/rec
+			\ :Denite buffer file/rec<cr>
 
 " |-----|
 " | Vue |
@@ -264,24 +262,53 @@ silent! call togglebg#map("<F5>")
 " |-------------------|
 " | Better whitespace |
 " |-------------------|
-nnoremap <leader>s :StripWhitespace
+nnoremap <leader>s :StripWhitespace<cr>
 let g:better_whitespace_operator='_s'
 
 " |-----|
 " | Coc |
 " |-----|
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " call context_filetype#version()
+
+" |--------|
+" | Jekyll |
+" |--------|
+let g:jekyll_post_extension='.md'
+let g:jekyll_post_filetype = 'markdown'
+let g:jekyll_post_template=[
+			\ '---',
+			\ 'author: "Hali"',
+			\ 'title: "JEKYLL_TITLE"',
+			\ 'date: "JEKYLL_DATE"',
+			\	'categories: []',
+			\ '---',
+			\ '']
+
+" |-------|
+" | Emoji |
+" |-------|
+nn <leader>emo :%s/:\(\w\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
+			\ /\asonetuh<cr>
+
+" |-----|
+" | PHP |
+" |-----|
+
+no <Leader>u :call phpactor#UseAdd()<CR>
+no <Leader>mm :call phpactor#ContextMenu()<CR>
+no <Leader>nn :call phpactor#Navigate()<CR>
+no <Leader>o :call phpactor#GotoDefinition()<CR>
+no <Leader>K :call phpactor#Hover()<CR>
+no <Leader>tt :call phpactor#Transform()<CR>
+no <Leader>cc :call phpactor#ClassNew()<CR>
+no <silent><Leader>ee :call phpactor#ExtractExpression(v:false)<CR>
+vn <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
+vn <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>

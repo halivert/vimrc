@@ -37,3 +37,36 @@ endsnippet
 snippet i@section "Inline section tag"
 @section($1, ${0:$1})
 endsnippet
+
+snippet errors: "Errors for form input"
+:errors='@json(\$errors->get('$1'))'
+endsnippet
+
+snippet old "Old for form input"
+old="{{ old('$1') }}"
+endsnippet
+
+snippet noe "Name, old, errors combo"
+name="$1"
+old="{{ old('${2:$1}') }}"
+:errors='@json(\$errors->get('${3:$2}'))'
+endsnippet
+
+snippet nve "Name, value, errors combo"
+name="$1"
+value="{{ old('${2:$1}') }}"
+:errors='@json(\$errors->get('${3:$2}'))'
+endsnippet
+
+snippet float-button "Floating button"
+@include('includes/floating-button', [
+	'url' => route('$1'),
+	${2:'text' => __('${3:general.$4}')}
+])
+endsnippet
+
+snippet can "Can blade directive"
+@can ($1)
+	$0
+@endcan
+endsnippet
