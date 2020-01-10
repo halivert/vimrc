@@ -16,6 +16,9 @@ Plug 'tpope/vim-dispatch'
 
 " Prettier
 Plug 'sbdchd/neoformat'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x' }
 
 " Coc
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -77,6 +80,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Jekyll
 Plug 'parkr/vim-jekyll'
+Plug 'tpope/vim-liquid'
 
 " Emoji
 Plug 'junegunn/vim-emoji'
@@ -131,6 +135,7 @@ let g:table_mode_tableize_map='<Leader>tz'
 let g:blade_custom_directives = ['tovue']
 let g:blade_custom_directives_pairs = {
 			\   'cache': 'endcache',
+			\   'canany': 'endcanany',
 			\ }
 let g:php_html_load=0
 let g:php_sql_query=0
@@ -275,7 +280,8 @@ endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 command! -nargs=0 Format :call CocAction('format')
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+nn <leader>f :call CocAction('format')<cr>
+" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " call context_filetype#version()
 
 " |--------|

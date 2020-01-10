@@ -9,7 +9,7 @@ set relativenumber
 set number
 syntax enable
 
-let mapleader='`'
+let mapleader='\'
 set splitbelow
 set splitright
 set autoindent
@@ -113,6 +113,11 @@ endfunction
 
 set undofile
 cno help tab help
+
+" Use with anne pro 2 dvorak layout (es layout)
+" noremap ñ :
+
+" Use with anne pro 2 dvorak layout (us layout)
 noremap ; :
 noremap : ;
 

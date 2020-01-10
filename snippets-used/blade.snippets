@@ -59,7 +59,7 @@ value="{{ old('${2:$1}') }}"
 endsnippet
 
 snippet float-button "Floating button"
-@include('includes/floating-button', [
+@include('includes.floating-button', [
 	'url' => route('$1'),
 	${2:'text' => __('${3:general.$4}')}
 ])
@@ -70,3 +70,27 @@ snippet can "Can blade directive"
 	$0
 @endcan
 endsnippet
+
+snippet b-input "Bulma input"
+<b-input
+	label="{{ __('${1:general.$2}') }}"
+	placeholder="{{ __('${3:$1}') }}"
+	${4:noe}
+	${5:required}>
+	$0
+</b-input>
+endsnippet
+
+snippet b-select "Bulma select"
+<b-select
+	label="{{ __('${1:general.$2}') }}"
+	placeholder="{{ __('${3:$1}') }}"
+	:elements=${4:'${5:@json($6)}'}
+	name="$7"
+	old="{{ old('${8:$7}') }}"
+	:errors='@json(\$errors->get('${9:$8}'))'
+	${10:required}>
+	$0
+</b-select>
+endsnippet
+
