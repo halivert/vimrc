@@ -85,6 +85,9 @@ Plug 'tpope/vim-liquid'
 " Emoji
 Plug 'junegunn/vim-emoji'
 
+" C++
+Plug 'rhysd/vim-clang-format'
+
 call plug#end()
 filetype plugin indent on
 
@@ -132,10 +135,11 @@ let g:table_mode_tableize_map='<Leader>tz'
 " |---------|
 " | Laravel |
 " |---------|
-let g:blade_custom_directives = ['tovue']
+let g:blade_custom_directives = ['tovue', 'default']
 let g:blade_custom_directives_pairs = {
 			\   'cache': 'endcache',
 			\   'canany': 'endcanany',
+			\   'switch': 'endswitch',
 			\ }
 let g:php_html_load=0
 let g:php_sql_query=0
@@ -241,7 +245,7 @@ let s:denite_options = {
 			\ 'winheight': 10,
 			\ 'winwidth': 80,
 			\ 'split': 'floating',
-			\ 'wincol': 45,
+			\ 'wincol': 28,
 			\ 'winrow': 3,
 			\ 'direction': 'topleft',
 			\ 'highlight_filter_background': 'CursorLine',
@@ -318,3 +322,11 @@ no <Leader>cc :call phpactor#ClassNew()<CR>
 no <silent><Leader>ee :call phpactor#ExtractExpression(v:false)<CR>
 vn <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
 vn <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+
+" |-----|
+" | C++ |
+" |-----|
+let g:clang_format#style_options = {
+			\ "AllowShortIfStatementsOnASingleLine" : "true",
+			\ "Standard" : "C++11"
+			\ }
