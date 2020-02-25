@@ -94,8 +94,6 @@ else
 	if [ -n $OUTPUT_FILE ] ; then
 		if [ ! -e $OUTPUT_FILE ] || [ "$FORCE" = true ] ; then
 			echo "let configPath = \"$configPath\"" > $OUTPUT_FILE
-			echo "so $configPath/.vimrc" >> $OUTPUT_FILE
-			echo "" >> $OUTPUT_FILE
 
 			if [ "$PLUGINS" = true ] || [ "$ALL" = true ] ; then
 				printf "Adding plugins.vim..."
@@ -110,6 +108,9 @@ else
 				echo "so $configPath/plugins.vim" >> $OUTPUT_FILE
 				printf "plugins.vim added\n\n"
 			fi
+
+			echo "so $configPath/.vimrc" >> $OUTPUT_FILE
+			echo "" >> $OUTPUT_FILE
 
 			if [ "$FUNCTIONS" = true ] || [ "$ALL" = true ] ; then
 				printf "Adding functions.vim... "
