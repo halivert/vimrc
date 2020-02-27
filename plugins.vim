@@ -89,7 +89,7 @@ Plug 'junegunn/vim-emoji'
 Plug 'rhysd/vim-clang-format'
 
 " Themes
-Plug 'Badacadabra/vim-archery'
+Plug 'rafi/awesome-vim-colorschemes'
 
 call plug#end()
 filetype plugin indent on
@@ -175,7 +175,7 @@ let mustache_abreviations=1
 " |---------|
 " | Airline |
 " |---------|
-let g:airline_theme='archery'
+let g:airline_theme='gotham'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'

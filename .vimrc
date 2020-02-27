@@ -83,7 +83,7 @@ noremap ; :
 noremap : ;
 
 " so solarizedTheme.vim
-colo archery
+colo gotham
 
 set undodir=$HOME/.vim/undodir
 if exists("configPath")
