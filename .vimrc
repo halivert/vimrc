@@ -83,9 +83,27 @@ noremap ; :
 noremap : ;
 
 " so solarizedTheme.vim
-colo gotham
+colo PaperColor
 
 set undodir=$HOME/.vim/undodir
 if exists("configPath")
 	execute "nn <leader>ev :tabedit " . configPath . "/.vimrc"
 endif
+
+function! InitialBackground()
+	let l:initial = split("10:00", ":")
+	let l:final = split("19:00", ":")
+	let l:now = split(strftime("%H:%M"), ":")
+
+	let l:initialToNow = ((l:now[0] * 60 + l:now[1]) - (l:initial[0] * 60 + l:initial[1]))
+	let l:nowToFinal = ((l:now[0] * 60 + l:now[1]) - (l:final[0] * 60 + l:final[1]))
+
+	if (l:initialToNow > 0 && l:nowToFinal < 0)
+		set background=light
+	else
+		set background=dark
+	endif
+endfunction
+
+call InitialBackground()
+
