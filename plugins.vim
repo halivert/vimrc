@@ -2,31 +2,38 @@ call plug#begin('$HOME/.vim/plugged')
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 Plug 'alvan/vim-closetag'
-Plug 'junegunn/limelight.vim'
-Plug 'godlygeek/tabular' " Needed for plasticboy/vim-markdown
-Plug 'plasticboy/vim-markdown'
-Plug 'tpope/vim-commentary'
+" Plug 'junegunn/limelight.vim'
+" Plug 'godlygeek/tabular' " Needed for plasticboy/vim-markdown
+" Plug 'plasticboy/vim-markdown'
+" Plug 'tpope/vim-commentary'
+Plug 'tyru/caw.vim'
+Plug 'Shougo/context_filetype.vim'
+Plug 'chrisbra/unicode.vim'
+
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'suy/vim-context-commentstring'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'suy/vim-context-commentstring'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-dispatch'
 
 " Prettier
 Plug 'sbdchd/neoformat'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Coc
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " Denite
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-yarp'
-Plug 'Shougo/denite.nvim'
+if has('nvim')
+	Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+	Plug 'Shougo/denite.nvim'
+	Plug 'roxma/nvim-yarp'
+	Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -44,39 +51,40 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Javascript
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " Laravel
 Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
-Plug 'noahfrederick/vim-composer', { 'for': ['php', 'blade'] }
+" Plug 'noahfrederick/vim-composer', { 'for': ['php', 'blade'] }
 Plug 'noahfrederick/vim-laravel'
+Plug 'tpope/vim-projectionist'
 
 " PHP
-Plug 'stanangeloff/php.vim', { 'for': 'php' }
-Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
+Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+" Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
-Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2'
 Plug '2072/PHP-Indenting-for-VIm'
 
 " Mustache
-Plug 'mustache/vim-mustache-handlebars'
+" Plug 'mustache/vim-mustache-handlebars'
 
 " Kotlin
-Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
+" Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 
 " Latex
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " Haskell
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
+" Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+" Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
 
 " Frontend
 Plug 'mattn/emmet-vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Jekyll
 Plug 'parkr/vim-jekyll'
@@ -121,14 +129,14 @@ let g:closetag_filetypes='html,xhtml,phtml,blade,vue,markdown,liquid'
 " |-----------|
 " | Limelight |
 " |-----------|
-let g:limelight_default_coefficient=0.7
+" let g:limelight_default_coefficient=0.7
 
 " |----------|
 " | Markdown |
 " |----------|
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_math=1
-let g:vim_markdown_frontmatter=1
+" let g:vim_markdown_folding_disabled=1
+" let g:vim_markdown_math=1
+" let g:vim_markdown_frontmatter=1
 
 " |------------|
 " | Table mode |
@@ -170,12 +178,12 @@ let g:UltiSnipsEditSplit="vertical"
 " |----------|
 " | Mustache |
 " |----------|
-let mustache_abreviations=1
+" let mustache_abreviations=1
 
 " |---------|
 " | Airline |
 " |---------|
-let g:airline_theme='papercolor'
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -246,9 +254,9 @@ let s:denite_options = {
 			\ 'start_filter': 1,
 			\ 'source_names': 'short',
 			\ 'winheight': 10,
-			\ 'winwidth': 80,
+			\ 'winwidth': 69,
 			\ 'split': 'floating',
-			\ 'wincol': 28,
+			\ 'wincol': 7,
 			\ 'winrow': 3,
 			\ 'direction': 'topleft',
 			\ 'highlight_filter_background': 'CursorLine',
@@ -257,19 +265,12 @@ let s:denite_options = {
 
 call denite#custom#option('default', s:denite_options)
 
-nnoremap <silent> <space><space>
-			\ :Denite buffer file/rec<cr>
+nn <silent> <space><space> :Denite buffer file/rec<cr>
 
 " |-----|
 " | Vue |
 " |-----|
 let g:vue_disable_pre_processors=1
-
-" |-----------|
-" | Solarized |
-" |-----------|
-colorscheme solarized
-silent! call togglebg#map("<F5>")
 
 " |-------------------|
 " | Better whitespace |
@@ -308,8 +309,9 @@ let g:jekyll_post_template=[
 " |-------|
 " | Emoji |
 " |-------|
+set completefunc=emoji#complete
 nn <leader>emo :%s/:\(\w\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
-			\ /\asonetuh<cr>
+			\ let @/ = ""<cr>
 
 " |-----|
 " | PHP |
@@ -333,3 +335,13 @@ let g:clang_format#style_options = {
 			\ "AllowShortIfStatementsOnASingleLine" : "true",
 			\ "Standard" : "C++11"
 			\ }
+
+" |-------|
+" | Theme |
+" |-------|
+
+let g:gruvbox_transparent_bg='1'
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
+" colorscheme solarized
+" silent! call togglebg#map("<F5>")

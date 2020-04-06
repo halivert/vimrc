@@ -35,18 +35,18 @@ while true; do
 done
 
 FTPLUGIN=(
-"blade.vim"
-"markdown.vim"
-"gitcommit.vim"
-"haskell.vim"
-"htmldjango.vim"
-"javascript.vim"
-"make.vim"
-"netrw.vim"
-"php.vim"
-"scss.vim"
-"tex.vim"
-"vue.vim"
+	"blade.vim"
+	"markdown.vim"
+	"gitcommit.vim"
+	"haskell.vim"
+	"htmldjango.vim"
+	"javascript.vim"
+	"make.vim"
+	"netrw.vim"
+	"php.vim"
+	"scss.vim"
+	"tex.vim"
+	"vue.vim"
 )
 
 create_file_types_links() {

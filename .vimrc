@@ -21,9 +21,9 @@ set ruler
 set wrap
 set wildmenu
 set hlsearch
-set textwidth=78
 set diffopt=vertical
 set termguicolors
+set timeoutlen=500
 
 if has('gui_running')
 	set guifont=IBM\ Plex\ Mono\ 11
@@ -37,6 +37,7 @@ set hidden
 
 nn Q <nop>
 nn <leader>es :UltiSnipsEdit<cr>
+nn <leader><leader> :let @/ = ""<cr>
 nmap <leader>y "+y
 nmap <leader>p "+p
 vnoremap <leader>y "+y
@@ -51,13 +52,14 @@ augroup AutoSaveFolds
 	autocmd BufWinEnter ?* silent! loadview
 augroup end
 
-imap `? ¿
-imap `! ¡
-imap `<< «
-imap `>> »
+ino `? ¿
+ino `! ¡
+ino `<< «
+ino `>> »
 
+set textwidth=80
 if (exists('+colorcolumn'))
-	set colorcolumn=79
+	set colorcolumn=81
 	highlight ColorColumn guibg=#5f8700 ctermbg=8
 endif
 
@@ -83,11 +85,12 @@ noremap ; :
 noremap : ;
 
 " so solarizedTheme.vim
-colo PaperColor
+colo gruvbox
 
 set undodir=$HOME/.vim/undodir
 if exists("configPath")
 	execute "nn <leader>ev :tabedit " . configPath . "/.vimrc"
+	execute "nn <leader>ep :tabedit " . configPath . "/plugins.vim"
 endif
 
 function! InitialBackground()
@@ -107,3 +110,4 @@ endfunction
 
 call InitialBackground()
 
+autocmd BufRead,BufNewFile *.vifm set filetype=vim
