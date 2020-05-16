@@ -12,11 +12,12 @@ syntax enable
 let mapleader='\'
 set splitbelow
 set splitright
+
 set autoindent
 set noexpandtab
-set shiftwidth=2
 set tabstop=2
-set softtabstop=2
+set shiftwidth=2
+
 set ruler
 set wrap
 set wildmenu
@@ -52,8 +53,6 @@ augroup AutoSaveFolds
 	autocmd BufWinEnter ?* silent! loadview
 augroup end
 
-ino `? ¿
-ino `! ¡
 ino `<< «
 ino `>> »
 
@@ -70,6 +69,8 @@ set keywordprg=online-search
 set updatetime=100
 nn <C-S> :tabe<CR>
 nn <C-_> :bd<CR>
+map <C-Tab> gt
+map <C-S-Tab> gT
 
 set tags+=./.git/tags;
 nn <leader>c :silent! !git ctags<cr><C-L>

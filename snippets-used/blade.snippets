@@ -94,3 +94,11 @@ snippet b-select "Bulma select"
 </b-select>
 endsnippet
 
+snippet showField "Bulma field to show data"
+<div class="field">
+	<label class="label is-inline-block">{{
+		__('${1:general.${2:label}}')
+	}}:</label>
+	<span>{{ \$${3:model}->${4:$2} }}</span>
+</div>
+endsnippet

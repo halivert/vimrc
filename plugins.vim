@@ -7,9 +7,9 @@ Plug 'alvan/vim-closetag'
 " Plug 'junegunn/limelight.vim'
 " Plug 'godlygeek/tabular' " Needed for plasticboy/vim-markdown
 " Plug 'plasticboy/vim-markdown'
-" Plug 'tpope/vim-commentary'
-Plug 'tyru/caw.vim'
-Plug 'Shougo/context_filetype.vim'
+Plug 'tpope/vim-commentary'
+" Plug 'tyru/caw.vim'
+" Plug 'Shougo/context_filetype.vim'
 Plug 'chrisbra/unicode.vim'
 
 Plug 'dhruvasagar/vim-table-mode'
@@ -60,11 +60,11 @@ Plug 'noahfrederick/vim-laravel'
 Plug 'tpope/vim-projectionist'
 
 " PHP
-Plug 'StanAngeloff/php.vim', { 'for': 'php' }
+" Plug 'StanAngeloff/php.vim', { 'for': 'php' }
 " Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
-Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
 " Plug 'ncm2/ncm2'
-Plug '2072/PHP-Indenting-for-VIm'
+" Plug '2072/PHP-Indenting-for-VIm'
 
 " Mustache
 " Plug 'mustache/vim-mustache-handlebars'
@@ -99,6 +99,8 @@ Plug 'rhysd/vim-clang-format'
 " Themes
 Plug 'rafi/awesome-vim-colorschemes'
 
+Plug 'tbastos/vim-lua'
+
 call plug#end()
 filetype plugin indent on
 
@@ -116,7 +118,10 @@ let g:syntastic_check_on_wq=0
 
 let g:syntastic_aggregate_errors=1
 let g:syntastic_cpp_compiler_options="`pkg-config gtkmm-3.0 --libs --cflags`"
-let g:syntastic_html_tidy_ignore_errors=['proprietary attribute "ng-', 'trimming empty \<']
+let g:syntastic_html_tidy_ignore_errors=[
+			\ 'proprietary attribute "ng-',
+			\ 'trimming empty \<'
+			\ ]
 let g:syntastic_ignore_files=['\m\c\.xml$', '\m\c\.ts$']
 let g:syntastic_python_checkers=['pylint']
 
@@ -155,9 +160,9 @@ let g:blade_custom_directives_pairs = {
 let g:php_html_load=0
 let g:php_sql_query=0
 
-"  |-------|
-"  | Latex |
-"  |-------|
+" |-------|
+" | Latex |
+" |-------|
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
@@ -186,10 +191,11 @@ let g:UltiSnipsEditSplit="vertical"
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 " |-----------|
 " | Gitgutter |
@@ -200,26 +206,18 @@ set signcolumn=yes
 " | Denite |
 " |--------|
 call denite#custom#var('file/rec', 'command',
-			\ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+			\ ['ag', '--follow', '--nocolor', '-U', '--nogroup', '-g', ''])
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
-	nnoremap <silent><buffer><expr> <cr>
-				\ denite#do_map('do_action')
-	nnoremap <silent><buffer><expr> d
-				\ denite#do_map('do_action', 'delete')
-	nnoremap <silent><buffer><expr> p
-				\ denite#do_map('do_action', 'preview')
-	nnoremap <silent><buffer><expr> q
-				\ denite#do_map('quit')
-	nnoremap <silent><buffer><expr> i
-				\ denite#do_map('open_filter_buffer')
-	nnoremap <silent><buffer><expr> t
-				\ denite#do_map('do_action', 'tabopen')
-	nnoremap <silent><buffer><expr> v
-				\ denite#do_map('do_action', 'vsplit')
-	nnoremap <silent><buffer><expr> <space>
-				\ denite#do_map('toggle_select')
+	nnoremap <silent><buffer><expr> <cr> denite#do_map('do_action')
+	nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+	nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+	nnoremap <silent><buffer><expr> q denite#do_map('quit')
+	nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+	nnoremap <silent><buffer><expr> t denite#do_map('do_action', 'tabopen')
+	nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
+	nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select')
 endfunction
 
 call denite#custom#var('grep', 'command', ['ag'])
@@ -232,16 +230,11 @@ call denite#custom#var('grep', 'final_opts', [])
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
 	imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
-	inoremap <silent><buffer><expr> <cr>
-				\ denite#do_map('do_action')
-	inoremap <silent><buffer><expr> <c-t>
-				\ denite#do_map('do_action', 'tabopen')
-	inoremap <silent><buffer><expr> <c-v>
-				\ denite#do_map('do_action', 'vsplit')
-	inoremap <silent><buffer><expr> <c-x>
-				\ denite#do_map('do_action', 'split')
-	inoremap <silent><buffer><expr> <esc>
-				\ denite#do_map('quit')
+	inoremap <silent><buffer><expr> <cr> denite#do_map('do_action')
+	inoremap <silent><buffer><expr> <c-t> denite#do_map('do_action', 'tabopen')
+	inoremap <silent><buffer><expr> <c-v> denite#do_map('do_action', 'vsplit')
+	inoremap <silent><buffer><expr> <c-x> denite#do_map('do_action', 'split')
+	inoremap <silent><buffer><expr> <esc> denite#do_map('quit')
 	inoremap <silent><buffer> <C-j>
 				\ <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
 	inoremap <silent><buffer> <C-k>
@@ -289,7 +282,8 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 command! -nargs=0 Format :call CocAction('format')
 nn <leader>f :call CocAction('format')<cr>
-" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" command! -nargs=0 Prettier :call
+" \ CocAction('runCommand', 'prettier.formatFile')
 " call context_filetype#version()
 
 " |--------|
@@ -302,7 +296,7 @@ let g:jekyll_post_template=[
 			\ 'author: "Hali"',
 			\ 'title: "JEKYLL_TITLE"',
 			\ 'date: "JEKYLL_DATE"',
-			\	'categories: []',
+			\ 'categories: []',
 			\ '---',
 			\ '']
 
@@ -316,6 +310,9 @@ nn <leader>emo :%s/:\(\w\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
 " |-----|
 " | PHP |
 " |-----|
+" nn <silent><leader>f :call PhpCsFixerFixFile()<CR>
+" let g:php_cs_fixer_rules = "@Symfony"
+" let g:php_cs_fixer_config_file = '~/.dotfiles/.php_cs'
 
 no <Leader>u :call phpactor#UseAdd()<CR>
 no <Leader>mm :call phpactor#ContextMenu()<CR>
@@ -339,7 +336,6 @@ let g:clang_format#style_options = {
 " |-------|
 " | Theme |
 " |-------|
-
 let g:gruvbox_transparent_bg='1'
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
