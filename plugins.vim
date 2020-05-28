@@ -1,4 +1,4 @@
-call plug#begin('$HOME/.vim/plugged')
+call plug#begin('$HOME\.vim\plugged')
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -171,7 +171,7 @@ let g:UltiSnipsUsePythonVersion=3
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=['/home/hali/.vim/snippets-used']
+let g:UltiSnipsSnippetDirectories=['\home\hali\.vim\snippets-used']
 let g:jsx_ext_required=0
 let g:UltiSnipsEditSplit="vertical"
 
