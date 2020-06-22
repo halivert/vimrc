@@ -26,10 +26,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Denite
 if has('nvim')
 	Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-	Plug 'Shougo/denite.nvim'
-	Plug 'roxma/nvim-yarp'
-	Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " Airline
@@ -41,7 +37,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Snippets
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Laravel
@@ -135,16 +130,28 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-" |----------|
-" | Snippets |
-" |----------|
-let g:UltiSnipsUsePythonVersion=3
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsSnippetDirectories=['/home/hali/.vim/snippets-used']
-let g:jsx_ext_required=0
-let g:UltiSnipsEditSplit="vertical"
+" |--------------|
+" | coc-snippets |
+" |--------------|
+ino <silent><expr> <TAB>
+			\ pumvisible() ? coc#_select_confirm() :
+			\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+" let g:UltiSnipsUsePythonVersion=3
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsSnippetDirectories=['/home/hali/.vim/snippets-used']
+" let g:jsx_ext_required=0
 
 " |---------|
 " | Airline |
@@ -166,60 +173,62 @@ set signcolumn=yes
 " |--------|
 " | Denite |
 " |--------|
-call denite#custom#var('file/rec', 'com', [
-			\ 'ag', '--follow', '--nocolor', '--hidden',
-			\ '-U', '--nogroup', '-g', ''
-			\ ])
+if has('nvim')
+	call denite#custom#var('file/rec', 'com', [
+				\ 'ag', '--follow', '--nocolor', '--hidden',
+				\ '-U', '--nogroup', '-g', ''
+				\ ])
 
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-	nn <silent><buffer><expr> <cr> denite#do_map('do_action')
-	nn <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-	nn <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-	nn <silent><buffer><expr> q denite#do_map('quit')
-	nn <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-	nn <silent><buffer><expr> t denite#do_map('do_action', 'tabopen')
-	nn <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
-	nn <silent><buffer><expr> <space> denite#do_map('toggle_select')
-endfunction
+	autocmd FileType denite call s:denite_my_settings()
+	function! s:denite_my_settings() abort
+		nn <silent><buffer><expr> <cr> denite#do_map('do_action')
+		nn <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+		nn <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+		nn <silent><buffer><expr> q denite#do_map('quit')
+		nn <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+		nn <silent><buffer><expr> t denite#do_map('do_action', 'tabopen')
+		nn <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
+		nn <silent><buffer><expr> <space> denite#do_map('toggle_select')
+	endfunction
 
-call denite#custom#var('grep', 'com', ['ag'])
-call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
+	call denite#custom#var('grep', 'com', ['ag'])
+	call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+	call denite#custom#var('grep', 'recursive_opts', [])
+	call denite#custom#var('grep', 'pattern_opt', [])
+	call denite#custom#var('grep', 'separator', ['--'])
+	call denite#custom#var('grep', 'final_opts', [])
 
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-	imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
-	ino <silent><buffer><expr> <cr> denite#do_map('do_action')
-	ino <silent><buffer><expr> <c-t> denite#do_map('do_action', 'tabopen')
-	ino <silent><buffer><expr> <c-v> denite#do_map('do_action', 'vsplit')
-	ino <silent><buffer><expr> <c-x> denite#do_map('do_action', 'split')
-	ino <silent><buffer><expr> <esc> denite#do_map('quit')
-	ino <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
-	ino <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<cr><C-w>pA
-endfunction
+	autocmd FileType denite-filter call s:denite_filter_my_settings()
+	function! s:denite_filter_my_settings() abort
+		imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
+		ino <silent><buffer><expr> <cr> denite#do_map('do_action')
+		ino <silent><buffer><expr> <c-t> denite#do_map('do_action', 'tabopen')
+		ino <silent><buffer><expr> <c-v> denite#do_map('do_action', 'vsplit')
+		ino <silent><buffer><expr> <c-x> denite#do_map('do_action', 'split')
+		ino <silent><buffer><expr> <esc> denite#do_map('quit')
+		ino <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
+		ino <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<cr><C-w>pA
+	endfunction
 
-let s:denite_options = {
-			\ 'auto_resize': 1,
-			\ 'prompt': 'λ ',
-			\ 'start_filter': 1,
-			\ 'source_names': 'short',
-			\ 'winheight': 10,
-			\ 'winwidth': 69,
-			\ 'split': 'floating',
-			\ 'wincol': 7,
-			\ 'winrow': 3,
-			\ 'direction': 'topleft',
-			\ 'highlight_filter_background': 'CursorLine',
-			\ 'highlight_window_background': 'Type',
-			\ }
+	let s:denite_options = {
+				\ 'auto_resize': 1,
+				\ 'prompt': 'λ ',
+				\ 'start_filter': 1,
+				\ 'source_names': 'short',
+				\ 'winheight': 10,
+				\ 'winwidth': 69,
+				\ 'split': 'floating',
+				\ 'wincol': 7,
+				\ 'winrow': 3,
+				\ 'direction': 'topleft',
+				\ 'highlight_filter_background': 'CursorLine',
+				\ 'highlight_window_background': 'Type',
+				\ }
 
-call denite#custom#option('default', s:denite_options)
+	call denite#custom#option('default', s:denite_options)
 
-nn <silent> <space><space> :Denite buffer file/rec<cr>
+	nn <silent> <space><space> :Denite buffer file/rec<cr>
+endif
 
 " |-----|
 " | Vue |

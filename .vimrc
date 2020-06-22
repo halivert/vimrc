@@ -37,7 +37,7 @@ set pyxversion=3
 set hidden
 
 nn Q <nop>
-nn <leader>es :UltiSnipsEdit<cr>
+nn <leader>es :CocCommand snippets.editSnippets<cr>
 nn <leader><leader> :let @/ = ""<cr>
 nm <leader>y "+y
 nm <leader>p "+p
