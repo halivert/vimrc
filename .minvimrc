@@ -1,20 +1,18 @@
-se guicursor=a:hor50-Cursor-blinkwait175-blinkoff150-blinkon175
-
-" swapping : and ; save a lot of unneeded shifting:
+se gcr=a:hor50-Cursor-blinkwait175-blinkoff150-blinkon175
 no ; :
 no : ;
 se nu
 se rnu
 se sc
-let mapleader='`'
+let mapleader='\'
 se noet
-
 nn Q <nop>
-
 im `? ¿
 im `! ¡
-im `<< «
-im `>> »
-
 nn <C-S> :tabe<CR>
 nn <C-_> :bd<CR>
+nn <leader><leader> :let @/ = ""<cr>
+nm <leader>y "+y
+nm <leader>p "+p
+vn <leader>y "+y
+vn <leader>p "+p
