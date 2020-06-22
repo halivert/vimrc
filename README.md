@@ -17,6 +17,9 @@ _**`-p / --plugins`**_
 _**`-s / --secret`**_
 >	Agrega como fuente un archivo «secreto» ubicado en `$HOME/.vim/secret.vim`.
 
+_**`--snippets`**_
+>	Crea un soft link para el directorio `snippets-used`.
+
 _**`-t / --file-types`**_
 >	Crea soft links para los tipos de archivos.
 
@@ -24,7 +27,7 @@ _**`-a / --all`**_
 >	Agrega como fuente los archivos de funciones, plugins, secreto y crea soft
 > links para los tipos de archivos.
 
-_**`-m / --minimal`**_
+_**`-m / --minimal`**_[*](#instalación-mínima)
 >	Agrega solo un archivo con las instrucciones mínimas.
 
 ### Opción 2 (manual)
@@ -63,6 +66,18 @@ nuestra terminal:
 ```bash
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+## Instalación mínima
+
+Para una instalación mínima, en un servidor, por ejemplo, hay que ejecutar el
+siguiente comando:
+
+```bash
+curl https://raw.githubusercontent.com/halivert/vimrc/master/.minvimrc >> $HOME/.vimrc
+# O
+wget https://raw.githubusercontent.com/halivert/vimrc/master/.minvimrc
+mv .minvimrc $HOME/.vimrc
 ```
 
 [1]: https://github.com/junegunn/vim-plug
