@@ -1,26 +1,23 @@
+filetype plugin indent on
+
 call plug#begin('$HOME/.vim/plugged')
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'alvan/vim-closetag'
-" Plug 'junegunn/limelight.vim'
-" Plug 'godlygeek/tabular' " Needed for plasticboy/vim-markdown
-" Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-commentary'
-" Plug 'tyru/caw.vim'
-" Plug 'Shougo/context_filetype.vim'
 Plug 'chrisbra/unicode.vim'
-
+Plug 'vim-test/vim-test'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'nelstrom/vim-visual-star-search'
-" Plug 'suy/vim-context-commentstring'
-" Plug 'altercation/vim-colors-solarized'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-dispatch'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-projectionist'
+Plug 'Shougo/context_filetype.vim'
 
 " Prettier
-Plug 'sbdchd/neoformat'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Coc
@@ -43,48 +40,24 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Vue
-Plug 'posva/vim-vue', { 'for': 'vue' }
-
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Javascript
-" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-
 " Laravel
-Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
-" Plug 'noahfrederick/vim-composer', { 'for': ['php', 'blade'] }
 Plug 'noahfrederick/vim-laravel'
-Plug 'tpope/vim-projectionist'
 
 " PHP
-" Plug 'StanAngeloff/php.vim', { 'for': 'php' }
-" Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
+Plug 'stephpy/vim-php-cs-fixer', { 'for': 'php' }
 Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
-" Plug 'ncm2/ncm2'
-" Plug '2072/PHP-Indenting-for-VIm'
-
-" Mustache
-" Plug 'mustache/vim-mustache-handlebars'
-
-" Kotlin
-" Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
+Plug 'dantleech/vim-phpunit'
 
 " Latex
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
-" Rust
-" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-" Haskell
-" Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-" Plug 'enomsg/vim-haskellConcealPlus', { 'for': 'haskell' }
-
 " Frontend
 Plug 'mattn/emmet-vim'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 
 " Jekyll
 Plug 'parkr/vim-jekyll'
@@ -93,16 +66,12 @@ Plug 'tpope/vim-liquid'
 " Emoji
 Plug 'junegunn/vim-emoji'
 
-" C++
-Plug 'rhysd/vim-clang-format'
-
 " Themes
 Plug 'rafi/awesome-vim-colorschemes'
 
-Plug 'tbastos/vim-lua'
-
 call plug#end()
-filetype plugin indent on
+
+call context_filetype#version()
 
 " |-----------|
 " | Syntastic |
@@ -131,17 +100,12 @@ let g:syntastic_python_checkers=['pylint']
 let g:closetag_filenames='*.html,*.xhtml,*.phtml'
 let g:closetag_filetypes='html,xhtml,phtml,blade,vue,markdown,liquid'
 
-" |-----------|
-" | Limelight |
-" |-----------|
-" let g:limelight_default_coefficient=0.7
-
 " |----------|
 " | Markdown |
 " |----------|
-" let g:vim_markdown_folding_disabled=1
-" let g:vim_markdown_math=1
-" let g:vim_markdown_frontmatter=1
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_math=1
+let g:vim_markdown_frontmatter=1
 
 " |------------|
 " | Table mode |
@@ -156,6 +120,8 @@ let g:blade_custom_directives_pairs = {
 			\   'cache': 'endcache',
 			\   'canany': 'endcanany',
 			\   'switch': 'endswitch',
+			\   'error': 'enderror',
+			\   'empty': 'endempty',
 			\ }
 let g:php_html_load=0
 let g:php_sql_query=0
@@ -180,11 +146,6 @@ let g:UltiSnipsSnippetDirectories=['/home/hali/.vim/snippets-used']
 let g:jsx_ext_required=0
 let g:UltiSnipsEditSplit="vertical"
 
-" |----------|
-" | Mustache |
-" |----------|
-" let mustache_abreviations=1
-
 " |---------|
 " | Airline |
 " |---------|
@@ -205,22 +166,24 @@ set signcolumn=yes
 " |--------|
 " | Denite |
 " |--------|
-call denite#custom#var('file/rec', 'command',
-			\ ['ag', '--follow', '--nocolor', '-U', '--nogroup', '-g', ''])
+call denite#custom#var('file/rec', 'com', [
+			\ 'ag', '--follow', '--nocolor', '--hidden',
+			\ '-U', '--nogroup', '-g', ''
+			\ ])
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
-	nnoremap <silent><buffer><expr> <cr> denite#do_map('do_action')
-	nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-	nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-	nnoremap <silent><buffer><expr> q denite#do_map('quit')
-	nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-	nnoremap <silent><buffer><expr> t denite#do_map('do_action', 'tabopen')
-	nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
-	nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select')
+	nn <silent><buffer><expr> <cr> denite#do_map('do_action')
+	nn <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+	nn <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+	nn <silent><buffer><expr> q denite#do_map('quit')
+	nn <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+	nn <silent><buffer><expr> t denite#do_map('do_action', 'tabopen')
+	nn <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
+	nn <silent><buffer><expr> <space> denite#do_map('toggle_select')
 endfunction
 
-call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'com', ['ag'])
 call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
@@ -230,15 +193,13 @@ call denite#custom#var('grep', 'final_opts', [])
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
 	imap <silent><buffer> <tab> <Plug>(denite_filter_quit)
-	inoremap <silent><buffer><expr> <cr> denite#do_map('do_action')
-	inoremap <silent><buffer><expr> <c-t> denite#do_map('do_action', 'tabopen')
-	inoremap <silent><buffer><expr> <c-v> denite#do_map('do_action', 'vsplit')
-	inoremap <silent><buffer><expr> <c-x> denite#do_map('do_action', 'split')
-	inoremap <silent><buffer><expr> <esc> denite#do_map('quit')
-	inoremap <silent><buffer> <C-j>
-				\ <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
-	inoremap <silent><buffer> <C-k>
-				\ <Esc><C-w>p:call cursor(line('.')-1,0)<cr><C-w>pA
+	ino <silent><buffer><expr> <cr> denite#do_map('do_action')
+	ino <silent><buffer><expr> <c-t> denite#do_map('do_action', 'tabopen')
+	ino <silent><buffer><expr> <c-v> denite#do_map('do_action', 'vsplit')
+	ino <silent><buffer><expr> <c-x> denite#do_map('do_action', 'split')
+	ino <silent><buffer><expr> <esc> denite#do_map('quit')
+	ino <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<cr><C-w>pA
+	ino <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<cr><C-w>pA
 endfunction
 
 let s:denite_options = {
@@ -268,23 +229,16 @@ let g:vue_disable_pre_processors=1
 " |-------------------|
 " | Better whitespace |
 " |-------------------|
-nnoremap <leader>s :StripWhitespace<cr>
+nn <leader>s :StripWhitespace<cr>
 let g:better_whitespace_operator='_s'
 
 " |-----|
 " | Coc |
 " |-----|
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-inoremap <silent><expr> <c-space> coc#refresh()
-command! -nargs=0 Format :call CocAction('format')
+ino <silent><expr> <c-space> coc#refresh()
 nn <leader>f :call CocAction('format')<cr>
-" command! -nargs=0 Prettier :call
-" \ CocAction('runCommand', 'prettier.formatFile')
-" call context_filetype#version()
 
 " |--------|
 " | Jekyll |
@@ -293,10 +247,11 @@ let g:jekyll_post_extension='.md'
 let g:jekyll_post_filetype = 'markdown'
 let g:jekyll_post_template=[
 			\ '---',
-			\ 'author: "Hali"',
+			\ 'author: halivert',
 			\ 'title: "JEKYLL_TITLE"',
 			\ 'date: "JEKYLL_DATE"',
-			\ 'categories: []',
+			\ 'category: ""',
+			\ 'tags: []',
 			\ '---',
 			\ '']
 
@@ -308,12 +263,8 @@ nn <leader>emo :%s/:\(\w\+\):/\=emoji#for(submatch(1), submatch(0))/g<cr>
 			\ let @/ = ""<cr>
 
 " |-----|
-" | PHP |
+" | Php |
 " |-----|
-" nn <silent><leader>f :call PhpCsFixerFixFile()<CR>
-" let g:php_cs_fixer_rules = "@Symfony"
-" let g:php_cs_fixer_config_file = '~/.dotfiles/.php_cs'
-
 no <Leader>u :call phpactor#UseAdd()<CR>
 no <Leader>mm :call phpactor#ContextMenu()<CR>
 no <Leader>nn :call phpactor#Navigate()<CR>
@@ -339,5 +290,19 @@ let g:clang_format#style_options = {
 let g:gruvbox_transparent_bg='1'
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
-" colorscheme solarized
-" silent! call togglebg#map("<F5>")
+
+" |-------|
+" | 2html |
+" |-------|
+let g:html_font = ['Iosevka', 'IBM Plex Mono']
+let g:html_use_css = 1
+let g:html_prevent_copy = "n"
+
+" |-------|
+" | Tests |
+" |-------|
+nn <silent> t<C-n> :TestNearest<CR>
+nn <silent> t<C-f> :TestFile<CR>
+nn <silent> t<C-s> :TestSuite<CR>
+nn <silent> t<C-t> :TestLast<CR>
+nn <silent> t<C-g> :TestVisit<CR>

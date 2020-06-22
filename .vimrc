@@ -39,10 +39,13 @@ set hidden
 nn Q <nop>
 nn <leader>es :UltiSnipsEdit<cr>
 nn <leader><leader> :let @/ = ""<cr>
-nmap <leader>y "+y
-nmap <leader>p "+p
-vnoremap <leader>y "+y
-vnoremap <leader>p "+p
+nm <leader>y "+y
+nm <leader>p "+p
+vn <leader>y "+y
+vn <leader>p "+p
+
+vn J :m '>+1<cr>gv=gv
+vn K :m '<-2<cr>gv=gv
 
 nn <leader># :so $MYVIMRC<cr>
 
@@ -66,11 +69,12 @@ set lazyredraw
 set regexpengine=1
 set keywordprg=online-search
 
-set updatetime=100
+set updatetime=200
 nn <C-S> :tabe<CR>
 nn <C-_> :bd<CR>
-map <C-Tab> gt
-map <C-S-Tab> gT
+
+nn <C-TAB> :bn<CR>
+nn <C-S-Tab> :bp<CR>
 
 set tags+=./.git/tags;
 nn <leader>c :silent! !git ctags<cr><C-L>
@@ -79,11 +83,11 @@ set undofile
 cno help tab help
 
 " Use with anne pro 2 dvorak layout (es layout)
-" noremap ñ :
+" no ñ :
 
 " Use with anne pro 2 dvorak layout (us layout)
-noremap ; :
-noremap : ;
+no ; :
+no : ;
 
 " so solarizedTheme.vim
 colo gruvbox

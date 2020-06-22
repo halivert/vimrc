@@ -26,7 +26,7 @@ public function $1($2)
 endsnippet
 
 snippet prop "Property"
-protected \$${1:property}${2: = };
+protected \$${1:property}${2: = $3};
 endsnippet
 
 snippet item "Item of associative array"
@@ -42,4 +42,29 @@ endsnippet
 
 snippet descr "Add description to lang files"
 'description' => '${1:En este lugar podrá encontrar $0}',
+endsnippet
+
+snippet pivot:table "Pivot table for Laravel migrations"
+\$table->primary(['$1', '$2']);
+\$table->foreignId('$1')
+	->constrained($3);
+\$table->foreignId('$2')
+	->constrained($4);
+\$table->timestamps(${5:6});
+endsnippet
+
+snippet test "Test for phpunit"
+/**
+ * @test
+ */
+public function ${2:test$3}($4)
+{
+	$0
+}
+endsnippet
+
+snippet afun "Anonymous function" i
+function ($1) ${2:use ($3)} {
+	$0
+}
 endsnippet

@@ -59,14 +59,14 @@ value="{{ old('${2:$1}') }}"
 endsnippet
 
 snippet float-button "Floating button"
-@include('includes.floating-button', [
-	'url' => route('$1'),
-	${2:'text' => __('${3:general.$4}')}
-])
+<x-floating-button
+	:url="route('$1')"
+	${2:text="${3:general.$4}"}>
+</x-floating-button>
 endsnippet
 
 snippet can "Can blade directive"
-@can ($1)
+@can($1)
 	$0
 @endcan
 endsnippet
@@ -101,4 +101,31 @@ snippet showField "Bulma field to show data"
 	}}:</label>
 	<span>{{ \$${3:model}->${4:$2} }}</span>
 </div>
+endsnippet
+
+snippet t:form "Tailwindcss form"
+<div class="mb-6">
+	<label
+		class="block mb-2 uppercase font-bold text-xs text-gray-700"
+		for="$1">
+		${0:$1}
+	</label>
+
+	<input
+		class="border border-gray-400 p-2 w-full"
+		type="text"
+		name="$1"
+		id="$1"
+		required>
+
+	@error('$1')
+		<p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+	@enderror
+</div>
+endsnippet
+
+snippet isset "Isset blade directive"
+@isset(${1:\$var})
+	$0
+@endisset
 endsnippet
