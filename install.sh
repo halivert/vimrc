@@ -38,37 +38,14 @@ while true; do
 	esac
 done
 
-FTPLUGIN=(
-	"blade.vim"
-	"gitcommit.vim"
-	"haskell.vim"
-	"htmldjango.vim"
-	"javascript.vim"
-	"lua.vim"
-	"make.vim"
-	"markdown.vim"
-	"netrw.vim"
-	"php.vim"
-	"scss.vim"
-	"tex.vim"
-	"vue.vim"
-)
-
 create_file_types_links() {
 	if [ ! -d "$HOME/.vim/ftplugin" ] ; then
-		printf "Creating ftplugin directory... "
-		mkdir -p $HOME/.vim/ftplugin
+		printf "Linking ftplugin directory... "
+		ln -s $configPath/ftplugin/ $HOME/.vim/ftplugin
+	else
+		printf "Creating soft links... "
+		ln -s $configPath/ftplugin/* $HOME/.vim/ftplugin
 	fi
-
-	printf "Creating soft links... "
-	for f in "${FTPLUGIN[@]}"
-	do
-		if [ -e $HOME/.vim/ftplugin/$f ] ; then
-			create_back_up_file $HOME/.vim/ftplugin/$f
-		fi
-
-		ln -s $configPath/$f $HOME/.vim/ftplugin
-	done
 	printf "Soft links created\n\n"
 }
 
@@ -94,14 +71,14 @@ create_back_up_file() {
 
 print_help() {
 	echo "--output            Output file
--p | --plugins      Add plugins
--f | --functions    Add functions
--s | --secret       Source secret file
---snippets          Link used snippets
--t | --file-types   Link file types
--a | --all          Install all
--m | --minimal      Minimal install
--h | --help         Print this message"
+	-p | --plugins      Add plugins
+	-f | --functions    Add functions
+	-s | --secret       Source secret file
+	--snippets          Link used snippets
+	-t | --file-types   Link file types
+	-a | --all          Install all
+	-m | --minimal      Minimal install
+	-h | --help         Print this message"
 }
 
 if [ "$HELP" = true ] ; then

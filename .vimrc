@@ -70,7 +70,7 @@ set regexpengine=1
 set keywordprg=online-search
 
 set updatetime=200
-nn <C-S> :tabe<CR>
+nn <C-S> :e<CR>
 nn <C-_> :bd<CR>
 
 nn <C-TAB> :bn<CR>
@@ -80,7 +80,6 @@ set tags+=./.git/tags;
 nn <leader>c :silent! !git ctags<cr><C-L>
 
 set undofile
-cno help tab help
 
 " Use with anne pro 2 dvorak layout (es layout)
 " no ñ :
@@ -89,13 +88,12 @@ cno help tab help
 no ; :
 no : ;
 
-" so solarizedTheme.vim
 colo gruvbox
 
 set undodir=$HOME/.vim/undodir
 if exists("configPath")
-	execute "nn <leader>ev :tabedit " . configPath . "/.vimrc"
-	execute "nn <leader>ep :tabedit " . configPath . "/plugins.vim"
+	execute "nn <leader>ev :e " . configPath . "/.vimrc"
+	execute "nn <leader>ep :e " . configPath . "/plugins.vim"
 endif
 
 function! InitialBackground()
