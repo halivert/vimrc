@@ -16,3 +16,4 @@ nm <leader>y "+y
 nm <leader>p "+p
 vn <leader>y "+y
 vn <leader>p "+p
+se hls
